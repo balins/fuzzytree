@@ -65,3 +65,10 @@ doc/generated/
 
 # PyBuilder
 target/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# PyCharm
+.idea

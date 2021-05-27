@@ -2,45 +2,15 @@ import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
-from ._criterion import gain_ratio, gini_criterion, misclassification_ratio
-from ._splitter import split_node
-from ._tree import DecisionNode, Leaf
+from ._criterion import gini_criterion, gain_ratio, misclassification_ratio
+from ._splitter import Splitter
+from ._tree import FuzzyDecisionTreeBuilder
 
 CRITERION_CLF = {
     'gini': gini_criterion,
     'entropy': gain_ratio,
     'misclassification': misclassification_ratio
 }
-
-
-class FuzzyDecisionTreeBuilder:
-    def __new__(cls, clf, X, y, depth=0):
-        params = clf.get_params()
-
-        if depth == params['max_depth'] or X.shape[0] < params['min_samples_split']:
-            return Leaf(y, clf.classes_)
-
-        if params['criterion'] in CRITERION_CLF:
-            gain_function = CRITERION_CLF[params['criterion']]
-        else:
-            gain_function = params['criterion']
-
-        rule, gain = split_node(X, y, gain_function)
-
-        if not rule or gain < params['min_impurity_decrease']:
-            return Leaf(y, clf.classes_)
-
-        mask = rule.evaluate(X)
-        n_true = np.count_nonzero(mask)
-        n_false = mask.shape[0] - n_true
-
-        if min(n_true, n_false) < params['min_samples_leaf']:
-            return Leaf(y, clf.classes_)
-
-        true_branch = FuzzyDecisionTreeBuilder(clf, X[mask], y[mask], depth + 1)
-        false_branch = FuzzyDecisionTreeBuilder(clf, X[~mask], y[~mask], depth + 1)
-
-        return DecisionNode(rule, true_branch, false_branch, clf.classes_)
 
 
 class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
@@ -72,7 +42,7 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
         self.random_state = random_state
         self.min_impurity_decrease = min_impurity_decrease
 
-    def fit(self, X, y):
+    def fit(self, X, y, check_input=True):
         """A reference implementation of a fitting function for a classifier.
 
         Parameters
@@ -81,65 +51,71 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
             The training input samples.
         y : array-like, shape (n_samples,)
             The target values. An array of int.
+        check_input : bool, default=True
+            Allow to bypass several input checking.
+            Don't use this parameter unless you know what you do.
 
         Returns
         -------
         self : object
             Returns self.
+            :param check_input:
         """
-        X, y = check_X_y(X, y)
-
-        self.classes_, y = np.unique(y, return_inverse=True)
+        if check_input:
+            X, y = check_X_y(X, y)
 
         self.X_ = X
-        self.y_ = y
+        self.classes_, self.y_ = np.unique(y, return_inverse=True)
 
-        self.decision_node_ = FuzzyDecisionTreeBuilder(self, self.X_, self.y_)
+        self.builder_ = FuzzyDecisionTreeBuilder(splitter=Splitter(CRITERION_CLF[self.criterion]),
+                                                 max_depth=self.max_depth,
+                                                 min_samples_split=self.min_samples_split,
+                                                 min_samples_leaf=self.min_samples_leaf,
+                                                 min_impurity_decrease=self.min_impurity_decrease,
+                                                 )
+
+        self.tree_ = self.builder_.build(self.X_, self.y_, self.classes_)
 
         return self
 
-    def predict_(self, X, log_proba):
-        """ A reference implementation of a prediction for a classifier.
-
+    def _predict(self, X, check_input=True):
+        """Predict log probabilities for each class each samples in X.
         Parameters
         ----------
-        X : array-like, shape (n_samples, n_features)
-            The input samples.
-
+        X : array-like of shape (n_samples, n_features)
+            The input samples. Internally, it will be converted to
+            ``dtype=np.float32``.
+        check_input : bool, default=True
+            Allow to bypass several input checking.
+            Don't use this parameter unless you know what you do.
         Returns
         -------
-        y : ndarray, shape (n_samples,)
-            The label for each sample is the label of the closest sample
-            seen during fit.
+        y : array-like of (n_samples, n_outputs)
+            The predicted log probabilities of classes.
         """
-        check_is_fitted(self, 'decision_node_')
+        check_is_fitted(self)
+        if check_input:
+            X = check_array(X)
 
-        X = check_array(X)
-        X_T = np.transpose(X)
+        if X.shape[1] != self.X_.shape[1]:
+            raise ValueError('Number of input features is different from what was seen '
+                             f'in `fit` (was {self.X_.shape[1]}, got {X.shape[1]})')
 
-        if X_T.shape[0] != self.X_.T.shape[0]:
-            raise ValueError('Number of input features is different from what was seen'
-                             f'in `fit` (was {self.X_.T.shape[0]}, got {X_T.shape[0]})')
-
-        y = self.decision_node_.predict_log_proba(X)
-
-        if log_proba:
-            return y
-        else:
-            return self.classes_[np.argmax(y, axis=1)]
+        return self.tree_.predict(X)
 
     def predict(self, X):
-        return self.predict_(X, log_proba=False)
+        return self.classes_[np.argmax(self._predict(X), axis=1)]
 
     def predict_proba(self, X):
-        return np.exp(self.predict_(X, log_proba=True))
+        return np.exp(self._predict(X))
 
     def predict_log_proba(self, X):
-        return self.predict_(X, log_proba=True)
+        return self._predict(X)
 
     def _get_tags(self):
         return {
             'multilabel': True,
+            'multioutput': True,
             'pairwise': True,
             'requires_y': True
         }

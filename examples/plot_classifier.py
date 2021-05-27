@@ -7,11 +7,11 @@ An example plot of :class:`skltemplate.template.TemplateClassifier`
 """
 import numpy as np
 from matplotlib import pyplot as plt
-from skltemplate import TemplateClassifier
+from fuzzy_tree import FuzzyDecisionTreeClassifier
 
 X = [[0, 0], [1, 1]]
 y = [0, 1]
-clf = TemplateClassifier()
+clf = FuzzyDecisionTreeClassifier()
 clf.fit(X, y)
 
 rng = np.random.RandomState(13)
