@@ -49,6 +49,7 @@ class FuzzyTree:
         self.rule = rule
         self.true_branch = true_branch
         self.false_branch = false_branch
+        self.n_outputs = self.all_classes.shape[0]
 
     def predict(self, X):
         if self.is_leaf:
@@ -58,7 +59,7 @@ class FuzzyTree:
 
     def _predict_internal(self, X):
         mask = self.rule.evaluate(X)
-        prediction = np.zeros((mask.shape[0], self.all_classes.shape[0]))
+        prediction = np.empty((mask.shape[0], self.all_classes.shape[0]))
 
         n_true = np.count_nonzero(mask)
         n_false = X.shape[0] - n_true

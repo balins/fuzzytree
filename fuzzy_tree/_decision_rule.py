@@ -21,7 +21,7 @@ class DecisionRule:
             raise ValueError(f"Input of this decision rule must have at least {self.feature + 1} features."
                              f"Got {n_features}")
         if n_samples == 0:
-            return np.array([])
+            return np.array([], dtype=bool)
 
         return self.evaluate_(X[:, self.feature])
 

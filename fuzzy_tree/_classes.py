@@ -66,6 +66,9 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
 
         self.X_ = X
         self.classes_, self.y_ = np.unique(y, return_inverse=True)
+        self.n_classes_ = self.classes_.shape[0]
+        self.max_features_ = X.shape[1]
+        self.n_features_ = X.shape[1]
 
         self.builder_ = FuzzyDecisionTreeBuilder(splitter=Splitter(CRITERION_CLF[self.criterion]),
                                                  max_depth=self.max_depth,
@@ -104,10 +107,12 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
         return self.tree_.predict(X)
 
     def predict(self, X):
-        return self.classes_[np.argmax(self._predict(X), axis=1)]
+        log_proba = self._predict(X)
+        return self.classes_[np.argmax(log_proba, axis=1)]
 
     def predict_proba(self, X):
-        return np.exp(self._predict(X))
+        log_proba = self._predict(X)
+        return np.exp(log_proba)
 
     def predict_log_proba(self, X):
         return self._predict(X)
@@ -115,7 +120,5 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
     def _get_tags(self):
         return {
             'multilabel': True,
-            'multioutput': True,
-            'pairwise': True,
             'requires_y': True
         }
