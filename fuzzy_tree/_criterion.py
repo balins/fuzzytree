@@ -1,11 +1,10 @@
 import numpy as np
 
-from fuzzy_tree._utils import split_by_membership
+from ._utils import split_by_membership
 
 
 def membership_ratio(y, membership):
-    unique = np.unique(y)
-    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in unique])
+    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in np.unique(y)])
 
     return membership_by_class / membership_by_class.sum()
 
@@ -17,7 +16,7 @@ def gini(y, membership):
     """
     mr = membership_ratio(y, membership)
 
-    gini_ = 1. - np.sum(mr ** 2.)
+    gini_ = 1. - np.sum(mr ** 2)
 
     return gini_
 
@@ -88,19 +87,19 @@ def gini_criterion(y, membership, new_membership):
     return gini_criterion_
 
 
-def gain_ratio(y, membership, new_membership):
+def entropy_decrease(y, membership, new_membership):
     """
     Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
     y: a NumPy array-like of split feature values
     mask: split choices
     """
 
-    gain_ratio_ = impurity_decrease(y, membership, new_membership, entropy) / entropy(y, membership)
+    entropy_decrease_ = impurity_decrease(y, membership, new_membership, entropy)
 
-    return gain_ratio_
+    return entropy_decrease_
 
 
-def misclassification_ratio(y, membership, new_membership):
+def misclassification_decrease(y, membership, new_membership):
     """
     Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
     y: a NumPy array-like of split feature values

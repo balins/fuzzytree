@@ -2,14 +2,14 @@ import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 
-from ._criterion import gini_criterion, gain_ratio, misclassification_ratio
+from ._criterion import gini_criterion, entropy_decrease, misclassification_decrease
 from ._splitter import Splitter
 from ._tree import FuzzyDecisionTreeBuilder
 
 CRITERION_CLF = {
     'gini': gini_criterion,
-    'entropy': gain_ratio,
-    'misclassification': misclassification_ratio
+    'entropy': entropy_decrease,
+    'misclassification': misclassification_decrease
 }
 
 
@@ -77,7 +77,7 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
                                                  min_impurity_decrease=self.min_impurity_decrease,
                                                  )
 
-        self.tree_ = self.builder_.build(self.X_, self.y_, self.classes_)
+        self.tree_ = self.builder_.build(self.X_, self.y_, self.n_classes_)
 
         return self
 
@@ -104,10 +104,10 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
             raise ValueError('Number of input features is different from what was seen '
                              f'in `fit` (was {self.X_.shape[1]}, got {X.shape[1]})')
 
-        prediction = self.tree_.predict(X)
+        prediction = self.tree_.predict(X, np.ones(X.shape[0]))
 
-        # if np.any(prediction.sum(axis=1) > 1.01) or np.any(prediction.sum(axis=1) < 0.97):
-        #     raise ValueError(prediction.sum(axis=1))
+        if np.any(prediction.sum(axis=1) > 1.01) or np.any(prediction.sum(axis=1) < 0.97):
+            raise ValueError(prediction.sum(axis=1))
 
         return prediction
 
