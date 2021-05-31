@@ -1,101 +1,112 @@
 import numpy as np
 
-
-def frequency_ratio(y):
-    _, counts = np.unique(y, return_counts=True)
-    return counts / y.shape[0]
+from fuzzy_tree._utils import split_by_membership
 
 
-def gini(y):
+def membership_ratio(y, membership):
+    unique = np.unique(y)
+    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in unique])
+
+    return membership_by_class / membership_by_class.sum()
+
+
+def gini(y, membership):
     """
     Given an array of labels, calculate its Gini impurity
     y: array of labels
     """
-    freq_ratio = frequency_ratio(y)
+    mr = membership_ratio(y, membership)
 
-    gini_ = 1 - np.sum(freq_ratio ** 2)
+    gini_ = 1. - np.sum(mr ** 2.)
 
     return gini_
 
 
-def entropy(y):
+def entropy(y, membership):
     """
     Given an array-like, calculate its entropy.
     y: NumPy array-like of labels
     """
-    freq_ratio = frequency_ratio(y)
+    mr = membership_ratio(y, membership)
 
-    entropy_ = -np.sum(freq_ratio * np.log2(freq_ratio))
+    if not 0.999 < mr.sum() < 1.001:
+        raise ValueError(mr.sum())
 
-    return entropy_
+    entropy_ = -np.sum(mr * np.log(mr))
+
+    if not 0.0 <= entropy_ < 1.1:
+        raise ValueError(entropy_)
+
+    return min(entropy_, 1.)
 
 
-def misclassification(y):
+def misclassification(y, membership):
     """
     Given an array-like, calculate its entropy.
     y: NumPy array-like of labels
     """
-    if y.shape[0] == 0:
-        return 0
+    mr = membership_ratio(y, membership)
 
-    labels, _ = np.unique(y, return_counts=True)
-
-    labels_freq = labels / y.shape[0]
-
-    impurity = 1 - labels_freq.max()
+    impurity = 1. - mr.max()
 
     return impurity
 
 
-def impurity_decrease(X, y, mask, criterion):
+def impurity_decrease(y, membership, new_membership, criterion):
     """
     Given a NumPy array-like and its split masks, calculate the information gain of that split
     y: a NumPy array-like of split feature values
     masks: split choices
     """
-    n_samples = X.shape[0]
+    membership_true, indices_true = split_by_membership(membership, new_membership)
+    membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-    n_true = np.count_nonzero(mask)
-    n_false = n_samples - n_true
+    if not abs(membership.sum() - (membership_true.sum() + membership_false.sum())) < 5:
+        print(membership_true.sum() + membership_false.sum())
+        print(membership)
+        print(new_membership)
+        print(membership_true)
+        print(membership_false)
+        raise ValueError(membership.sum())
 
-    information_gain_ = criterion(y) \
-                        - n_true / n_samples * criterion(y[mask]) \
-                        - n_false / n_samples * criterion(y[~mask])
+    information_gain_ = criterion(y, membership) \
+                        - membership_true.sum() / membership.sum() * criterion(y[indices_true], membership_true) \
+                        - membership_false.sum() / membership.sum() * criterion(y[indices_false], membership_false)
 
     return information_gain_
 
 
-def gini_criterion(X, y, mask):
+def gini_criterion(y, membership, new_membership):
     """
     Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
     y: a NumPy array-like of split feature values
     mask: split choices
     """
 
-    gini_criterion_ = impurity_decrease(X, y, mask, gini)
+    gini_criterion_ = impurity_decrease(y, membership, new_membership, gini)
 
     return gini_criterion_
 
 
-def gain_ratio(X, y, mask):
+def gain_ratio(y, membership, new_membership):
     """
     Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
     y: a NumPy array-like of split feature values
     mask: split choices
     """
 
-    gain_ratio_ = impurity_decrease(X, y, mask, entropy) / entropy(y)
+    gain_ratio_ = impurity_decrease(y, membership, new_membership, entropy) / entropy(y, membership)
 
     return gain_ratio_
 
 
-def misclassification_ratio(X, y, mask):
+def misclassification_ratio(y, membership, new_membership):
     """
     Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
     y: a NumPy array-like of split feature values
     mask: split choices
     """
 
-    misclassification_ratio_ = impurity_decrease(X, y, mask, misclassification)
+    misclassification_ratio_ = impurity_decrease(y, membership, new_membership, misclassification)
 
     return misclassification_ratio_

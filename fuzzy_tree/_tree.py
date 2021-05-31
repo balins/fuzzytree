@@ -1,6 +1,6 @@
-import warnings
-
 import numpy as np
+
+from fuzzy_tree._utils import split_by_membership
 
 
 class FuzzyDecisionTreeBuilder:
@@ -18,66 +18,71 @@ class FuzzyDecisionTreeBuilder:
 
     def build(self, X, y, all_classes):
         self.all_classes_ = all_classes
-        return self._build(X, y, 0)
+        membership = np.ones(X.shape[0])
+        return self._build(X, y, membership, 0)
 
-    def _build(self, X, y, depth):
+    def _build(self, X, y, membership, depth):
         if depth == self.max_depth or X.shape[0] < self.min_samples_split:
-            return FuzzyTree(y, self.all_classes_)
+            return FuzzyTree(y, membership, self.all_classes_)
 
-        rule, gain = self.splitter.node_split(X, y)
-
+        rule, gain = self.splitter.node_split(X, y, membership)
         if not rule or gain < self.min_impurity_decrease:
-            return FuzzyTree(y, self.all_classes_)
+            return FuzzyTree(y, membership, self.all_classes_)
 
-        mask = rule.evaluate(X)
-        n_true = np.count_nonzero(mask)
-        n_false = mask.shape[0] - n_true
+        new_membership = rule.evaluate(X)
+        membership_true, indices_true = split_by_membership(membership, new_membership)
+        membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-        if min(n_true, n_false) < self.min_samples_leaf:
-            return FuzzyTree(y, self.all_classes_)
+        if not abs(membership.sum() - (membership_true.sum() + membership_false.sum())) < 5:
+            print(membership_true.sum() + membership_false.sum())
+            print(membership)
+            print(membership_false)
+            print(membership_true)
+            raise ValueError(membership.sum())
 
-        true_branch = self._build(X[mask], y[mask], depth + 1)
-        false_branch = self._build(X[~mask], y[~mask], depth + 1)
+        if min(membership_false.sum(), membership_true.sum()) < self.min_samples_leaf:
+            return FuzzyTree(y, membership, self.all_classes_)
 
-        return FuzzyTree(y, self.all_classes_, rule, true_branch, false_branch)
+        true_branch = self._build(X[indices_true], y[indices_true], membership_true, depth + 1)
+        false_branch = self._build(X[indices_false], y[indices_false], membership_false, depth + 1)
+
+        return FuzzyTree(y, membership, self.all_classes_, rule, true_branch, false_branch)
 
 
 class FuzzyTree:
-    def __init__(self, classes, all_classes, rule=None, true_branch=None, false_branch=None):
+    def __init__(self, y, membership, all_classes, rule=None, true_branch=None, false_branch=None):
         self.all_classes = all_classes
-        self.counts_ = np.bincount(classes, minlength=self.all_classes.shape[0])
+        self.membership = np.array([np.sum(membership[y == cls]) for cls in self.all_classes])
+        self.membership /= self.membership.sum()
         self.rule = rule
         self.true_branch = true_branch
         self.false_branch = false_branch
         self.n_outputs = self.all_classes.shape[0]
 
-    def predict(self, X):
+    def predict(self, X, membership=None):
+        if membership is None:
+            membership = np.ones(X.shape[0])
         if self.is_leaf:
-            return self._predict_leaf(X)
+            return self._predict_leaf(X, membership)
         else:
-            return self._predict_internal(X)
+            return self._predict_internal(X, membership)
 
-    def _predict_internal(self, X):
-        mask = self.rule.evaluate(X)
-        prediction = np.empty((mask.shape[0], self.all_classes.shape[0]))
+    def _predict_internal(self, X, membership):
+        new_membership = self.rule.evaluate(X)
+        membership_true, indices_true = split_by_membership(membership, new_membership)
+        membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-        n_true = np.count_nonzero(mask)
-        n_false = X.shape[0] - n_true
+        prediction = np.zeros((X.shape[0], self.all_classes.shape[0]))
 
-        if n_true > 0:
-            prediction[mask] = self.true_branch.predict(X[mask])
-        if n_false > 0:
-            prediction[~mask] = self.false_branch.predict(X[~mask])
+        if indices_true.size > 0:
+            prediction[indices_true] = self.true_branch.predict(X[indices_true], membership_true)
+        if indices_false.size > 0:
+            prediction[indices_false] += self.false_branch.predict(X[indices_false], membership_false)
 
-        return prediction
+        return membership[:, None] * prediction
 
-    def _predict_leaf(self, X):
-        with warnings.catch_warnings():
-            warnings.simplefilter('ignore')
-            classes_log_proba = np.log(self.counts_) - np.log(np.sum(self.counts_))
-
-        prediction = np.array([classes_log_proba] * X.shape[0])
-
+    def _predict_leaf(self, X, membership):
+        prediction = membership[:, None] * np.array([self.membership] * X.shape[0])
         return prediction
 
     @property

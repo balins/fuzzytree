@@ -104,18 +104,22 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
             raise ValueError('Number of input features is different from what was seen '
                              f'in `fit` (was {self.X_.shape[1]}, got {X.shape[1]})')
 
-        return self.tree_.predict(X)
+        prediction = self.tree_.predict(X)
+
+        # if np.any(prediction.sum(axis=1) > 1.01) or np.any(prediction.sum(axis=1) < 0.97):
+        #     raise ValueError(prediction.sum(axis=1))
+
+        return prediction
 
     def predict(self, X):
-        log_proba = self._predict(X)
-        return self.classes_[np.argmax(log_proba, axis=1)]
+        membership = self._predict(X)
+        return self.classes_[np.argmax(membership, axis=1)]
 
     def predict_proba(self, X):
-        log_proba = self._predict(X)
-        return np.exp(log_proba)
+        return self._predict(X)
 
     def predict_log_proba(self, X):
-        return self._predict(X)
+        return np.log(self.predict_proba(X))
 
     def _get_tags(self):
         return {
