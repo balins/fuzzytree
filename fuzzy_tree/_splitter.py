@@ -20,7 +20,7 @@ class Splitter:
             midpoint_splits = ((sorted_ + np.roll(sorted_, -1)) / 2)[:-1]
 
             for split_val in midpoint_splits:
-                rule = DecisionRule(min_=sorted_[0], split_val=split_val, max_=sorted_[-1], feature_idx=feature_idx)
+                rule = DecisionRule(sorted_, split_val, feature_idx)
                 new_membership = rule.evaluate(X)
                 gain = self.gain_function_(y, membership, new_membership)
                 if gain > best_gain:

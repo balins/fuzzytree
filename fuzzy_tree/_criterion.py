@@ -28,13 +28,7 @@ def entropy(y, membership):
     """
     mr = membership_ratio(y, membership)
 
-    if not 0.999 < mr.sum() < 1.001:
-        raise ValueError(mr.sum())
-
     entropy_ = -np.sum(mr * np.log(mr))
-
-    if not 0.0 <= entropy_ < 1.1:
-        raise ValueError(entropy_)
 
     return min(entropy_, 1.)
 
@@ -59,14 +53,6 @@ def impurity_decrease(y, membership, new_membership, criterion):
     """
     membership_true, indices_true = split_by_membership(membership, new_membership)
     membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
-
-    if not abs(membership.sum() - (membership_true.sum() + membership_false.sum())) < 5:
-        print(membership_true.sum() + membership_false.sum())
-        print(membership)
-        print(new_membership)
-        print(membership_true)
-        print(membership_false)
-        raise ValueError(membership.sum())
 
     information_gain_ = criterion(y, membership) \
                         - membership_true.sum() / membership.sum() * criterion(y[indices_true], membership_true) \

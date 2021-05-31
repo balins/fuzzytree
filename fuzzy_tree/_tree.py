@@ -22,7 +22,7 @@ class FuzzyDecisionTreeBuilder:
         return self._build(X, y, membership, 0)
 
     def _build(self, X, y, membership, depth):
-        if depth == self.max_depth or X.shape[0] < self.min_samples_split:
+        if depth == self.max_depth or membership.sum() < self.min_samples_split:
             return FuzzyTree(y, membership, self.n_outputs)
 
         rule, gain = self.splitter.node_split(X, y, membership)
@@ -32,13 +32,6 @@ class FuzzyDecisionTreeBuilder:
         new_membership = rule.evaluate(X)
         membership_true, indices_true = split_by_membership(membership, new_membership)
         membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
-
-        if not abs(membership.sum() - (membership_true.sum() + membership_false.sum())) < 5:
-            print(membership_true.sum() + membership_false.sum())
-            print(membership)
-            print(membership_false)
-            print(membership_true)
-            raise ValueError(membership.sum())
 
         if min(membership_false.sum(), membership_true.sum()) < self.min_samples_leaf:
             return FuzzyTree(y, membership, self.n_outputs)

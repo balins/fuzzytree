@@ -14,8 +14,7 @@ CRITERION_CLF = {
 
 
 class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseEstimator):
-    """A fuzzy decision tree classifier
-    .
+    """A fuzzy decision tree classifier.
     Read more in the :ref:`User Guide <fuzzy_tree>`.
 
     Attributes

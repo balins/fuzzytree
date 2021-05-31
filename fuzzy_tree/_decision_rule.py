@@ -1,19 +1,22 @@
 import numpy as np
+from ._utils import s_shaped_membership, sigmoid_membership
 
 
 class DecisionRule:
-    def __init__(self, min_, split_val, max_, feature_idx):
+    def __init__(self, sorted_feature, split_val, feature_idx):
         self.split_val = split_val
         self.feature_idx = feature_idx
 
-        margin = min(split_val - min_, max_ - split_val) / 2
-        a = split_val - margin
-        b = split_val + margin
-        self.universe = np.array([min_, a, split_val, b, max_])
+        # todo: choose membership -> s-shaped (default), sigmoid
+        # todo: choose crispness (b/c attributes in memb. functions)
 
-        self.membership = np.piecewise(self.universe,
-                                       [self.universe < a, self.universe >= a, self.universe >= b],
-                                       [0., lambda x: (x - a) / (b - a), 1.])
+        min_, max_ = sorted_feature[0], sorted_feature[-1]
+        a = split_val - sorted_feature.std()
+        b = split_val + sorted_feature.std()
+
+        self.universe = np.linspace(min_, max_, 100)
+        self.membership = s_shaped_membership(self.universe, a, b)
+        # self.membership = sigmoid_membership(self.universe, split_val, sorted_feature.std())
 
         # from matplotlib import pyplot as plt
         # fig, ax = plt.subplots(figsize=(8, 9))
@@ -29,21 +32,6 @@ class DecisionRule:
         # ax.get_yaxis().tick_left()
         #
         # plt.show()
-
-        if not 0.49 < np.interp(split_val, self.universe, self.membership) < 0.51:
-            raise ValueError(np.interp(split_val, self.universe, self.membership))
-
-        # print("split_val")
-        # print(split_val)
-        # print("universe")
-        # print(self.universe)
-        # print("membership")
-        # print(self.membership)
-        # print("linspace")
-        # print(np.linspace(min_, max_, 8))
-        # print("memb")
-        # print(fuzz.interp_membership(self.universe, self.membership, np.linspace(min_, max_, 8), zero_outside_x=False))
-        # print('------!!!-------')
 
     def evaluate(self, X):
         n_samples = X.shape[0]
