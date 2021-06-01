@@ -1,12 +1,6 @@
 import numpy as np
 
-from ._utils import split_by_membership
-
-
-def membership_ratio(y, membership):
-    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in np.unique(y)])
-
-    return membership_by_class / membership_by_class.sum()
+from ._utils import split_by_membership, membership_ratio
 
 
 def gini(y, membership):

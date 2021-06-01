@@ -22,3 +22,12 @@ def s_shaped_membership(x, a, b):
     y[idx] = 1 - 2. * ((x[idx] - b) / (b - a)) ** 2.
 
     return y
+
+
+def membership_ratio(y, membership, all_classes=None):
+    if all_classes is None:
+        all_classes = np.unique(y)
+
+    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in all_classes])
+
+    return membership_by_class / membership_by_class.sum()

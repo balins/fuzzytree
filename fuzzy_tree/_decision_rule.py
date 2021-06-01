@@ -1,4 +1,5 @@
 import numpy as np
+
 from ._utils import s_shaped_membership
 
 

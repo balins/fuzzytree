@@ -1,6 +1,6 @@
 import numpy as np
 
-from ._utils import split_by_membership
+from ._utils import split_by_membership, membership_ratio
 
 
 class FuzzyTreeBuilder:
@@ -46,8 +46,7 @@ class FuzzyTreeBuilder:
 
 class FuzzyTree:
     def __init__(self, y, membership, n_classes, level=0, rule=None, true_branch=None, false_branch=None):
-        self.class_weights = np.array([np.sum(membership[y == cls]) for cls in range(n_classes)])
-        self.class_weights /= self.class_weights.sum()
+        self.class_weights = membership_ratio(y, membership, np.arange(n_classes))
         self.n_classes = n_classes
         self.level = level
         self.rule = rule
