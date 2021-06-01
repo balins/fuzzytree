@@ -3,66 +3,67 @@ import numpy as np
 from ._utils import split_by_membership
 
 
-class FuzzyDecisionTreeBuilder:
+class FuzzyTreeBuilder:
     def __init__(self,
                  splitter,
+                 fuzziness,
+                 min_membership_split,
+                 min_membership_leaf,
                  max_depth,
-                 min_samples_split,
-                 min_samples_leaf,
                  min_impurity_decrease):
         self.splitter = splitter
+        self.fuzziness = fuzziness
+        self.min_membership_split = min_membership_split
+        self.min_membership_leaf = min_membership_leaf
         self.max_depth = max_depth
-        self.min_samples_split = min_samples_split
-        self.min_samples_leaf = min_samples_leaf
         self.min_impurity_decrease = min_impurity_decrease
 
-    def build(self, X, y, n_outputs):
-        self.n_outputs = n_outputs
-        membership = np.ones(X.shape[0])
-        return self._build(X, y, membership, 0)
+    def build(self, tree, X, y, membership):
+        self._build(tree, X, y, membership, 0)
 
-    def _build(self, X, y, membership, depth):
-        if depth == self.max_depth or membership.sum() < self.min_samples_split:
-            return FuzzyTree(y, membership, self.n_outputs)
+    def _build(self, tree, X, y, membership, depth):
+        if depth >= self.max_depth or membership.sum() < self.min_membership_split:
+            return
 
-        rule, gain = self.splitter.node_split(X, y, membership)
+        rule, gain = self.splitter.node_split(X, y, membership, self.fuzziness)
         if not rule or gain < self.min_impurity_decrease:
-            return FuzzyTree(y, membership, self.n_outputs)
+            return
 
         new_membership = rule.evaluate(X)
         membership_true, indices_true = split_by_membership(membership, new_membership)
         membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-        if min(membership_false.sum(), membership_true.sum()) < self.min_samples_leaf:
-            return FuzzyTree(y, membership, self.n_outputs)
+        if min(membership_false.sum(), membership_true.sum()) < self.min_membership_leaf:
+            return
 
-        true_branch = self._build(X[indices_true], y[indices_true], membership_true, depth + 1)
-        false_branch = self._build(X[indices_false], y[indices_false], membership_false, depth + 1)
+        tree.rule = rule
+        tree.true_branch = FuzzyTree(y[indices_true], membership_true, tree.n_classes, depth + 1)
+        tree.false_branch = FuzzyTree(y[indices_false], membership_false, tree.n_classes, depth + 1)
 
-        return FuzzyTree(y, membership, self.n_outputs, rule, true_branch, false_branch)
+        self._build(tree.true_branch, X[indices_true], y[indices_true], membership_true, depth + 1)
+        self._build(tree.false_branch, X[indices_false], y[indices_false], membership_false, depth + 1)
 
 
 class FuzzyTree:
-    def __init__(self, y, membership, n_outputs, rule=None, true_branch=None, false_branch=None):
-        self.membership = np.array([np.sum(membership[y == cls]) for cls in range(n_outputs)])
-        self.membership /= self.membership.sum()
-        self.n_outputs = n_outputs
+    def __init__(self, y, membership, n_classes, level=0, rule=None, true_branch=None, false_branch=None):
+        self.class_weights = np.array([np.sum(membership[y == cls]) for cls in range(n_classes)])
+        self.class_weights /= self.class_weights.sum()
+        self.n_classes = n_classes
+        self.level = level
         self.rule = rule
         self.true_branch = true_branch
         self.false_branch = false_branch
 
     def predict(self, X, membership):
-        if self.is_leaf:
-            return self._predict_leaf(membership)
-        else:
-            return self._predict_internal(X, membership)
+        return (self._predict_leaf(membership) if self.is_leaf
+                else self._predict_internal(X, membership))
 
     def _predict_internal(self, X, membership):
         new_membership = self.rule.evaluate(X)
         membership_true, indices_true = split_by_membership(membership, new_membership)
         membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-        prediction = np.zeros((X.shape[0], self.n_outputs))
+        prediction = np.zeros((X.shape[0], self.n_classes))
 
         if indices_true.size > 0:
             prediction[indices_true] = self.true_branch.predict(X[indices_true], membership_true)
@@ -72,7 +73,17 @@ class FuzzyTree:
         return prediction
 
     def _predict_leaf(self, membership):
-        return membership[:, None] * self.membership
+        return membership[:, None] * self.class_weights
+
+    @property
+    def max_depth(self):
+        return (self.level if self.is_leaf
+                else max(self.true_branch.max_depth, self.false_branch.max_depth))
+
+    @property
+    def n_leaves(self):
+        return (1 if self.is_leaf
+                else self.true_branch.n_leaves + self.false_branch.n_leaves)
 
     @property
     def is_leaf(self):

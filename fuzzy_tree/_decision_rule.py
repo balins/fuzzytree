@@ -1,37 +1,36 @@
 import numpy as np
-from ._utils import s_shaped_membership, sigmoid_membership
+from ._utils import s_shaped_membership
 
 
 class DecisionRule:
-    def __init__(self, sorted_feature, split_val, feature_idx):
+    def __init__(self, sorted_feature, split_val, feature_idx, fuzziness):
         self.split_val = split_val
         self.feature_idx = feature_idx
 
-        # todo: choose membership -> s-shaped (default), sigmoid
-        # todo: choose crispness (b/c attributes in memb. functions)
-
         min_, max_ = sorted_feature[0], sorted_feature[-1]
-        a = split_val - sorted_feature.std()
-        b = split_val + sorted_feature.std()
+        margin_width = fuzziness * sorted_feature.std()
+        a = split_val - margin_width
+        b = split_val + margin_width
 
-        self.universe = np.linspace(min_, max_, 100)
+        self.universe = np.linspace(min_, max_, 300)
         self.membership = s_shaped_membership(self.universe, a, b)
-        # self.membership = sigmoid_membership(self.universe, split_val, sorted_feature.std())
 
-        # from matplotlib import pyplot as plt
-        # fig, ax = plt.subplots(figsize=(8, 9))
+        # if not 0.4 < np.interp(split_val, self.universe, self.membership) < 0.5:
+        #     from matplotlib import pyplot as plt
+        #     fig, ax = plt.subplots(figsize=(8, 9))
         #
-        # ax.plot(self.universe, 1 - self.membership, 'b', linewidth=1.5, label='Low')
-        # ax.plot(self.universe, self.membership, 'r', linewidth=1.5, label='High')
-        # ax.set_title(f'feature {feature_idx}, split {split_val}')
-        # ax.legend()
+        #     ax.plot(self.universe, 1 - self.membership, 'b', linewidth=1.5, label='Low')
+        #     ax.plot(self.universe, self.membership, 'r', linewidth=1.5, label='High')
+        #     ax.set_title(f'feature {feature_idx}, split {split_val}, shape {shape}')
+        #     ax.legend()
         #
-        # ax.spines['top'].set_visible(False)
-        # ax.spines['right'].set_visible(False)
-        # ax.get_xaxis().tick_bottom()
-        # ax.get_yaxis().tick_left()
+        #     ax.spines['top'].set_visible(False)
+        #     ax.spines['right'].set_visible(False)
+        #     ax.get_xaxis().tick_bottom()
+        #     ax.get_yaxis().tick_left()
         #
-        # plt.show()
+        #     plt.show()
+        #     raise ValueError(np.interp(split_val, self.universe, self.membership))
 
     def evaluate(self, X):
         n_samples = X.shape[0]
