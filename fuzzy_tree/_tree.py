@@ -3,6 +3,8 @@ import numpy as np
 from ._utils import split_by_membership, membership_ratio
 
 
+# todo finish docs
+
 class FuzzyTreeBuilder:
     def __init__(self,
                  splitter,

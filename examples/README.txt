@@ -2,5 +2,4 @@
 
 General examples
 ================
-
-Introductory examples.
+General examples about fuzzy classification tree algorithm.

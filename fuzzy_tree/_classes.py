@@ -3,14 +3,6 @@ This module gathers fuzzy tree-based methods. Currently, only single-output deci
 trees are supported.
 """
 
-# Authors: Jakub Baliński <balinski.jakub@gmail.com>
-#
-# Special thanks to scikit-learn developers, especially the
-# team working on decision tree implementation - this work
-# is heavily inspired by this.
-#
-# License: BSD 3 clause
-
 from abc import ABCMeta, abstractmethod
 from sys import getrecursionlimit
 
@@ -19,7 +11,7 @@ from sklearn.base import BaseEstimator, ClassifierMixin, is_classifier
 from sklearn.utils.multiclass import check_classification_targets
 from sklearn.utils.validation import check_X_y, check_is_fitted, _check_sample_weight
 
-from ._criterion import gini_criterion, entropy_decrease, misclassification_decrease
+from . import _criterion
 from ._splitter import Splitter
 from ._tree import FuzzyTreeBuilder, FuzzyTree
 
@@ -29,9 +21,9 @@ __all__ = ["FuzzyDecisionTreeClassifier"]
 # Types and constants
 # =============================================================================
 
-CRITERIA_CLF = {"gini": gini_criterion,
-                "entropy": entropy_decrease,
-                "misclassification": misclassification_decrease}
+CRITERIA_CLF = {"gini": _criterion.gini_index,
+                "entropy": _criterion.entropy_decrease,
+                "misclassification": _criterion.misclassification_decrease}
 
 
 # =============================================================================
@@ -212,14 +204,14 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
     criterion : {"gini", "entropy", "misclassification"}, default="gini"
         The function to measure the quality of a split. Supported criteria are
         "gini" for the Gini impurity, "entropy" for the information gain and
-        "misclassification for the misclassification ratio.
+        "misclassification" for the misclassification ratio.
     max_depth : int, default=None
         The maximum depth of the tree. If None, then nodes are expanded until
         all leaves are pure or until all leaves contain less than
         min_membership_split sum of membership.
-    min_membership_split : float, default=2.
+    min_membership_split : float, default=2.0
         The minimum sum of membership required to split an internal node:
-    min_membership_leaf : float, default=1.
+    min_membership_leaf : float, default=1.0
         The minimum sum of membership required to be at a leaf node.
         A split point at any depth will only be considered if it leaves at
         least ``min_membership_leaf`` sum of membership in each of the left and
@@ -235,7 +227,7 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
         is the sum of membership in the right child.
     Attributes
     ----------
-    classes_ : ndarray of shape (n_classes,) or list of ndarray
+    classes_ : ndarray of shape (n_classes,)
         The classes labels.
     n_classes_ : int or list of int
         The number of classes (for single output problems),
@@ -249,9 +241,6 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
         The underlying Tree object. Please refer to
         ``help(fuzzy_tree.tree._tree.Tree)`` for attributes of Tree object and
         for basic usage of these attributes.
-    See Also
-    --------
-    DecisionTreeRegressor : A decision tree regressor.
     Notes
     -----
     The default values for the parameters controlling the size of the trees

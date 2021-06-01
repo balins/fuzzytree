@@ -3,47 +3,85 @@ import numpy as np
 from ._utils import split_by_membership, membership_ratio
 
 
-def gini(y, membership):
+def gini_index(y, membership, new_membership):
     """
-    Given an array of labels, calculate its Gini impurity
-    y: array of labels
+    Calculate the Gini index for new membership values.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    new_membership : array-like of shape (n_samples,)
+        The new membership of each label.
+    Returns
+    -------
+    float : decrease of impurity measured by Gini index
     """
-    mr = membership_ratio(y, membership)
 
-    gini_ = 1. - np.sum(mr ** 2)
+    gini_criterion_ = impurity_decrease(y, membership, new_membership, criterion=gini)
 
-    return gini_
+    return gini_criterion_
 
 
-def entropy(y, membership):
+def entropy_decrease(y, membership, new_membership):
     """
-    Given an array-like, calculate its entropy.
-    y: NumPy array-like of labels
+    Calculate the entropy decrease for new membership values.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    new_membership : array-like of shape (n_samples,)
+        The new membership of each label.
+    Returns
+    -------
+    float : decrease of impurity measured by entropy
     """
-    mr = membership_ratio(y, membership)
 
-    entropy_ = -np.sum(mr * np.log(mr))
+    entropy_decrease_ = impurity_decrease(y, membership, new_membership, criterion=entropy)
 
-    return min(entropy_, 1.)
+    return entropy_decrease_
 
 
-def misclassification(y, membership):
+def misclassification_decrease(y, membership, new_membership):
     """
-    Given an array-like, calculate its entropy.
-    y: NumPy array-like of labels
+    Calculate the decrease in misclassification ratio for new membership values.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    new_membership : array-like of shape (n_samples,)
+        The new membership of each label.
+    Returns
+    -------
+    float : decrease of impurity measured by misclassification ratio
     """
-    mr = membership_ratio(y, membership)
 
-    impurity = 1. - mr.max()
+    misclassification_ratio_ = impurity_decrease(y, membership, new_membership, criterion=misclassification)
 
-    return impurity
+    return misclassification_ratio_
 
 
 def impurity_decrease(y, membership, new_membership, criterion):
     """
-    Given a NumPy array-like and its split masks, calculate the information gain of that split
-    y: a NumPy array-like of split feature values
-    masks: split choices
+    A general function that calculates decrease in impurity.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    new_membership : array-like of shape (n_samples,)
+        The new membership of each label.
+    criterion: callable
+        The impurity function
+    Returns
+    -------
+    float : decrease of impurity measured by given criterion
     """
     membership_true, indices_true = split_by_membership(membership, new_membership)
     membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
@@ -55,37 +93,61 @@ def impurity_decrease(y, membership, new_membership, criterion):
     return information_gain_
 
 
-def gini_criterion(y, membership, new_membership):
+def gini(y, membership):
     """
-    Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
-    y: a NumPy array-like of split feature values
-    mask: split choices
+    Calculates decrease in impurity by Gini criterion.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    Returns
+    -------
+    float : impurity measured by Gini criterion
     """
+    mr = membership_ratio(y, membership)
 
-    gini_criterion_ = impurity_decrease(y, membership, new_membership, gini)
+    gini_ = 1. - np.sum(mr ** 2)
 
-    return gini_criterion_
+    return gini_
 
 
-def entropy_decrease(y, membership, new_membership):
+def entropy(y, membership):
     """
-    Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
-    y: a NumPy array-like of split feature values
-    mask: split choices
+    Calculates decrease in impurity by entropy.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    Returns
+    -------
+    float : impurity measured by entropy
     """
+    mr = membership_ratio(y, membership)
 
-    entropy_decrease_ = impurity_decrease(y, membership, new_membership, entropy)
+    entropy_ = -np.sum(mr * np.log(mr))
 
-    return entropy_decrease_
+    return entropy_
 
 
-def misclassification_decrease(y, membership, new_membership):
+def misclassification(y, membership):
     """
-    Given a NumPy array-like and its split masks, calculate the information gain ratio of that split
-    y: a NumPy array-like of split feature values
-    mask: split choices
+    Calculates decrease in impurity by misclassification ratio.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        An array of labels.
+    membership : array-like of shape (n_samples,)
+        The membership of each label.
+    Returns
+    -------
+    float : impurity measured by misclassification ratio
     """
+    mr = membership_ratio(y, membership)
 
-    misclassification_ratio_ = impurity_decrease(y, membership, new_membership, misclassification)
+    misclassification_ = 1. - mr.max()
 
-    return misclassification_ratio_
+    return misclassification_

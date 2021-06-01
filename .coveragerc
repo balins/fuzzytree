@@ -2,8 +2,8 @@
 
 [run]
 branch = True
-source = skltemplate
-include = */skltemplate/*
+source = fuzzy_tree
+include = */fuzzy_tree/*
 omit =
     */setup.py
 

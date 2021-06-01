@@ -1,5 +1,4 @@
-name: project-template
+name: fuzzy-tree
 dependencies:
   - numpy
-  - scipy
   - scikit-learn
