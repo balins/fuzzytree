@@ -1,4 +1,4 @@
-name: fuzzy-tree
+name: fuzzytree
 dependencies:
   - numpy
   - scikit-learn

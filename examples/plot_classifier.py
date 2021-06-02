@@ -1,40 +1,25 @@
 """
-============================
-Plotting Template Classifier
-============================
+=======================================
+Plotting Fuzzy Decision Tree Classifier
+=======================================
 
-An example plot of :class:`skltemplate.template.TemplateClassifier`
+An example plot of :class:`FuzzyDecisionTreeClassifier`
 """
-import numpy as np
 from matplotlib import pyplot as plt
-from fuzzy_tree import FuzzyDecisionTreeClassifier
+from mlxtend.plotting import plot_decision_regions
+from sklearn.datasets import make_blobs
 
-X = [[0, 0], [1, 1]]
-y = [0, 1]
-clf = FuzzyDecisionTreeClassifier()
-clf.fit(X, y)
+from fuzzytree import FuzzyDecisionTreeClassifier
 
-rng = np.random.RandomState(13)
-X_test = rng.rand(500, 2)
-y_pred = clf.predict(X_test)
+X, y = make_blobs(n_samples=300, n_features=2, centers=[[-23, -12], [12, 42], [52, 2], [-18, 41]],
+                  cluster_std=[10, 25, 12, 11], random_state=42)
 
-X_0 = X_test[y_pred == 0]
-X_1 = X_test[y_pred == 1]
+clf = FuzzyDecisionTreeClassifier().fit(X, y)
 
-
-p0 = plt.scatter(0, 0, c='red', s=100)
-p1 = plt.scatter(1, 1, c='blue', s=100)
-
-ax0 = plt.scatter(X_0[:, 0], X_0[:, 1], c='crimson', s=50)
-ax1 = plt.scatter(X_1[:, 0], X_1[:, 1], c='deepskyblue', s=50)
-
-leg = plt.legend([p0, p1, ax0, ax1],
-                 ['Point 0', 'Point 1', 'Class 0', 'Class 1'],
-                 loc='upper left', fancybox=True, scatterpoints=1)
-leg.get_frame().set_alpha(0.5)
-
+ax = plt.plot()
+fig = plot_decision_regions(X=X, y=y, clf=clf, legend=2)
+plt.title("Fuzzy Tree Classification on blobs")
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
-plt.xlim([-.5, 1.5])
 
 plt.show()

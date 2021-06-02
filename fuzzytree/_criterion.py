@@ -6,14 +6,16 @@ from ._utils import split_by_membership, membership_ratio
 def gini_index(y, membership, new_membership):
     """
     Calculate the Gini index for new membership values.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
     new_membership : array-like of shape (n_samples,)
         The new membership of each label.
+
     Returns
     -------
     float : decrease of impurity measured by Gini index
@@ -27,14 +29,16 @@ def gini_index(y, membership, new_membership):
 def entropy_decrease(y, membership, new_membership):
     """
     Calculate the entropy decrease for new membership values.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
     new_membership : array-like of shape (n_samples,)
         The new membership of each label.
+
     Returns
     -------
     float : decrease of impurity measured by entropy
@@ -48,14 +52,16 @@ def entropy_decrease(y, membership, new_membership):
 def misclassification_decrease(y, membership, new_membership):
     """
     Calculate the decrease in misclassification ratio for new membership values.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
     new_membership : array-like of shape (n_samples,)
         The new membership of each label.
+
     Returns
     -------
     float : decrease of impurity measured by misclassification ratio
@@ -69,6 +75,7 @@ def misclassification_decrease(y, membership, new_membership):
 def impurity_decrease(y, membership, new_membership, criterion):
     """
     A general function that calculates decrease in impurity.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
@@ -79,6 +86,7 @@ def impurity_decrease(y, membership, new_membership, criterion):
         The new membership of each label.
     criterion: callable
         The impurity function
+
     Returns
     -------
     float : decrease of impurity measured by given criterion
@@ -96,12 +104,14 @@ def impurity_decrease(y, membership, new_membership, criterion):
 def gini(y, membership):
     """
     Calculates decrease in impurity by Gini criterion.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
+
     Returns
     -------
     float : impurity measured by Gini criterion
@@ -116,12 +126,14 @@ def gini(y, membership):
 def entropy(y, membership):
     """
     Calculates decrease in impurity by entropy.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
+
     Returns
     -------
     float : impurity measured by entropy
@@ -136,12 +148,14 @@ def entropy(y, membership):
 def misclassification(y, membership):
     """
     Calculates decrease in impurity by misclassification ratio.
+
     Parameters
     ----------
     y : array-like of shape (n_samples,)
-        An array of labels.
+        The array of labels.
     membership : array-like of shape (n_samples,)
         The membership of each label.
+
     Returns
     -------
     float : impurity measured by misclassification ratio

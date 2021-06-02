@@ -1,34 +1,16 @@
-####################
-project-template API
-####################
+#############
+fuzzytree API
+#############
 
-This is an example on how to document the API of your own project.
+The documentation API of **fuzzytree** module.
 
-.. currentmodule:: skltemplate
+.. automodule:: fuzzytree
 
-Estimator
-=========
-
-.. autosummary::
-   :toctree: generated/
-   :template: class.rst
-
-   TemplateEstimator
-
-Transformer
-===========
+Fuzzy Decision Tree
+===================
 
 .. autosummary::
    :toctree: generated/
    :template: class.rst
 
-   TemplateTransformer
-
-Predictor
-=========
-
-.. autosummary::
-   :toctree: generated/
-   :template: class.rst
-
-    TemplateClassifier
+   FuzzyDecisionTreeClassifier

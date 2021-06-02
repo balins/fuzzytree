@@ -1,7 +1,7 @@
 import pytest
 from sklearn.datasets import load_iris
 
-from fuzzy_tree import FuzzyDecisionTreeClassifier
+from fuzzytree import FuzzyDecisionTreeClassifier
 
 
 @pytest.fixture

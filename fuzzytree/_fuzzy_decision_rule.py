@@ -4,22 +4,30 @@ from ._utils import s_shaped_membership
 
 
 class FuzzyDecisionRule:
-    """Fuzzy decision rule that defines a split."""
-    def __init__(self, sorted_feature, split_val, fuzziness, feature_idx):
-        """
-        Parameters
-        ----------
-        sorted_feature : array-like of shape (n_samples, n_features)
-            An ascendingly sorted ndarray of samples.
-        split_val : float
-            A value that defines a soft boundary of split
-        fuzziness : float
-            The fuzziness parameter that controls softness of boundary
-            between 0. (hard) and 1. (soft).
-        feature_idx : int
-            The index of feature that provides the values for the split.
-        """
+    """Fuzzy decision rule that defines a split.
 
+    Parameters
+    ----------
+    sorted_feature : array-like of shape (n_samples, n_features)
+        The ascendingly sorted ndarray of input samples.
+    split_val : float
+        The value that defines a soft boundary of split
+    fuzziness : float
+        The fuzziness parameter that controls softness of boundary
+        between 0. (hard) and 1. (soft).
+    feature_idx : int
+        The index of feature that provides the values for the split.
+
+    Attributes
+    ----------
+    universe : ndarray of shape (n_classes,)
+        The arguments for generated membership function.
+    membership : array-like of shape (len(universe),)
+        The array-like of membership values from each argument
+        from universe.
+    """
+
+    def __init__(self, sorted_feature, split_val, fuzziness, feature_idx):
         self.split_val = split_val
         self.feature_idx = feature_idx
 
@@ -33,14 +41,17 @@ class FuzzyDecisionRule:
 
     def evaluate(self, X):
         """Evaluate the decision rule on set of samples.
+        Uses interpolation to get values for samples not belonging to self.universe.
+
         Parameters
         ----------
-        X :  array-like of shape (n_samples, n_features)
-            An array of samples to be evaluated against the decision rule.
+        X : array-like of shape (n_samples, n_features)
+            The array of samples to be evaluated against the decision rule.
+
         Returns
         -------
         membership : array-like of shape (n_samples,)
-            An array containing membership values of each sample. The more
+            The array containing membership values of each sample. The more
             a sample fulfills the decision rule the bigger its membership
             value is.
         """

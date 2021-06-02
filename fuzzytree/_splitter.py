@@ -1,34 +1,38 @@
 import numpy as np
 
-from ._decision_rule import FuzzyDecisionRule
+from ._fuzzy_decision_rule import FuzzyDecisionRule
 
 
 class Splitter:
-    """Splitter for finding the best split."""
-    def __init__(self, gain_function):
-        """
-        Parameters
-        ----------
-        gain_function : callable
-            The function to measure the quality of a split.
-            Higher values indicate better split.
-        """
-        self.gain_function_ = gain_function
+    """Splitter for finding the best split.
 
-    def node_split(self, X, y, membership, fuzziness):
+    Parameters
+    ----------
+    gain_function : callable
+        The function to measure the quality of a split.
+        Higher values indicate better split.
+    fuzziness : float
+        The fuzziness parameter between 0. (crisp) and 1. (fuzzy) split.
+    """
+
+    def __init__(self, gain_function, fuzziness):
+        self.gain_function = gain_function
+        self.fuzziness = fuzziness
+
+    def node_split(self, X, y, membership):
         """Find the best split on X.
         Creates decision rules on each feature of X based on split values and
         given fuzziness ratio.
+
         Parameters
         ----------
-        X :  array-like of shape (n_samples, n_features)
-            An array of samples to be partitioned.
+        X : array-like of shape (n_samples, n_features)
+            The array of input samples to be partitioned.
         y : array-like of shape (n_samples,)
-            An array of labels.
+            The array of labels.
         membership : array-like of shape (n_samples,)
             The membership of each sample.
-        fuzziness : float
-            The fuzziness parameter between 0. (crisp) and 1. (fuzzy) split.
+
         Returns
         -------
         (best_gain, best_rule) : tuple of (float, FuzzyDecisionRule or None)
@@ -46,9 +50,9 @@ class Splitter:
             midpoint_splits = ((sorted_ + np.roll(sorted_, -1)) / 2)[:-1]
 
             for split_val in midpoint_splits:
-                rule = FuzzyDecisionRule(sorted_, split_val, fuzziness, feature_idx)
+                rule = FuzzyDecisionRule(sorted_, split_val, self.fuzziness, feature_idx)
                 new_membership = rule.evaluate(X)
-                gain = self.gain_function_(y, membership, new_membership)
+                gain = self.gain_function(y, membership, new_membership)
                 if gain > best_gain:
                     best_rule, best_gain = rule, gain
 

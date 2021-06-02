@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# project-template documentation build configuration file, created by
-# sphinx-quickstart on Mon Jan 18 14:44:12 2016.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #
@@ -74,15 +71,15 @@ plot_gallery = True
 master_doc = 'index'
 
 # General information about the project.
-project = u'sklearn-template'
-copyright = u'2016, Vighnesh Birodkar'
+project = u'fuzzytree'
+copyright = u'2021, Jakub Balinski'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-from skltemplate import __version__
+from fuzzytree import __version__
 version = __version__
 # The full version, including alpha/beta/rc tags.
 release = __version__
@@ -120,7 +117,7 @@ exclude_patterns = ['_build', '_templates']
 pygments_style = 'sphinx'
 
 # Custom style
-html_style = 'css/project-template.css'
+html_style = 'css/fuzzytree.css'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -211,7 +208,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'project-templatedoc'
+htmlhelp_basename = 'fuzzytreedoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -231,8 +228,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'project-template.tex', u'project-template Documentation',
-   u'Vighnesh Birodkar', 'manual'),
+  ('index', 'fuzzytree.tex', u'fuzzytree Documentation',
+   u'Jakub Balinski', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -261,8 +258,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'project-template', u'project-template Documentation',
-     [u'Vighnesh Birodkar'], 1)
+    ('index', 'fuzzytree', u'fuzzytree Documentation',
+     [u'Jakub Balinski'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -275,9 +272,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'project-template', u'project-template Documentation',
-   u'Vighnesh Birodkar', 'project-template', 'One line description of project.',
-   'Miscellaneous'),
+  ('index', 'fuzzytree', u'fuzzytree Documentation',
+   u'Jakub Balinski', 'fuzzytree', 'A scikit-learn compatible implementation of fuzzy decision tree estimator.',
+   'Decision trees'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -301,17 +298,17 @@ intersphinx_mapping = {
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
     'matplotlib': ('https://matplotlib.org/', None),
-    'sklearn': ('http://scikit-learn.org/stable', None)
+    'sklearn': ('https://scikit-learn.org/stable', None)
 }
 
 # sphinx-gallery configuration
 sphinx_gallery_conf = {
-    'doc_module': 'skltemplate',
+    'doc_module': 'fuzzytree',
     'backreferences_dir': os.path.join('generated'),
     'reference_url': {
-        'skltemplate': None}
+        'fuzzytree': None}
 }
 
 def setup(app):
     # a copy button to copy snippet of code from the documentation
-    app.add_javascript('js/copybutton.js')
+    app.add_js_file('js/copybutton.js')
