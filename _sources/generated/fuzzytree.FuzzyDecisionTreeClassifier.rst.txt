@@ -1,0 +1,17 @@
+﻿:mod:`fuzzytree`.FuzzyDecisionTreeClassifier
+===================================================
+
+.. currentmodule:: fuzzytree
+
+.. autoclass:: FuzzyDecisionTreeClassifier
+   :members:
+
+   
+   .. automethod:: __init__
+   
+
+.. include:: fuzzytree.FuzzyDecisionTreeClassifier.examples
+
+.. raw:: html
+
+    <div style='clear:both'></div>

@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>fuzzytree.FuzzyDecisionTreeClassifier &mdash; fuzzytree 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/fuzzytree.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fuzzytree.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/js/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General examples" href="../auto_examples/index.html" />
+    <link rel="prev" title="fuzzytree API" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> fuzzytree
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start with fuzzytree</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">fuzzytree API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#fuzzy-decision-tree">Fuzzy Decision Tree</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzzytree</span></code>.FuzzyDecisionTreeClassifier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#examples-using-fuzzytree-fuzzydecisiontreeclassifier">Examples using <code class="docutils literal notranslate"><span class="pre">fuzzytree.FuzzyDecisionTreeClassifier</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">General examples</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fuzzytree</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../api.html">fuzzytree API</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzzytree</span></code>.FuzzyDecisionTreeClassifier</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/generated/fuzzytree.FuzzyDecisionTreeClassifier.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fuzzytree-fuzzydecisiontreeclassifier">
+<h1><a class="reference internal" href="../api.html#module-fuzzytree" title="fuzzytree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzzytree</span></code></a>.FuzzyDecisionTreeClassifier<a class="headerlink" href="#fuzzytree-fuzzydecisiontreeclassifier" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="fuzzytree.FuzzyDecisionTreeClassifier">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fuzzytree.</span></span><span class="sig-name descname"><span class="pre">FuzzyDecisionTreeClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fuzziness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_membership_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_membership_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fuzzytree/_classes.html#FuzzyDecisionTreeClassifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fuzzytree.FuzzyDecisionTreeClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A fuzzy decision tree classifier.
+Read more in the <a class="reference internal" href="../user_guide.html#user-guide"><span class="std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>fuzziness</strong><span class="classifier">float, default=1.0</span></dt><dd><p>The fuzziness parameter that controls softness of the tree between 0.
+(hard) and 1. (soft).</p>
+</dd>
+<dt><strong>criterion</strong><span class="classifier">{“gini”, “entropy”, “misclassification”}, default=”gini”</span></dt><dd><p>The function to measure the quality of a split. Supported criteria are
+“gini” for the Gini impurity, “entropy” for the information gain and
+“misclassification” for the misclassification ratio.</p>
+</dd>
+<dt><strong>max_depth</strong><span class="classifier">int, default=None</span></dt><dd><p>The maximum depth of the tree. If None, then nodes are expanded until
+all leaves are pure or until all leaves contain less than
+min_membership_split sum of membership or recursion limit is met.</p>
+</dd>
+<dt><strong>min_membership_split</strong><span class="classifier">float, default=2.0</span></dt><dd><p>The minimum sum of membership required to split an internal node.</p>
+</dd>
+<dt><strong>min_membership_leaf</strong><span class="classifier">float, default=1.0</span></dt><dd><p>The minimum sum of membership required to be at a leaf node.
+A split point at any depth will only be considered if it leaves at
+least <code class="docutils literal notranslate"><span class="pre">min_membership_leaf</span></code> sum of membership in each of the left and
+right branches. This may have the effect of smoothing the model,
+especially in regression.</p>
+</dd>
+<dt><strong>min_impurity_decrease</strong><span class="classifier">float, default=0.0</span></dt><dd><p>A node will be split if this split induces a decrease of the impurity
+greater than or equal to this value.</p>
+<p>The weighted impurity decrease equation is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">impurity</span> <span class="o">-</span> <span class="n">M_t_R</span> <span class="o">/</span> <span class="n">M_t</span> <span class="o">*</span> <span class="n">right_impurity</span>
+         <span class="o">-</span> <span class="n">M_t_L</span> <span class="o">/</span> <span class="n">M_t</span> <span class="o">*</span> <span class="n">left_impurity</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">M_t_L</span></code> is the sum of membership in the left child and <code class="docutils literal notranslate"><span class="pre">M_t_R</span></code>
+is the sum of membership in the right child.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The default values for the parameters controlling the size of the trees
+(e.g. <code class="docutils literal notranslate"><span class="pre">max_depth</span></code>, <code class="docutils literal notranslate"><span class="pre">min_membership_leaf</span></code>, etc.) lead to fully grown and
+unpruned trees which can potentially be very large on some data sets. To
+reduce memory consumption, the complexity and size of the trees should be
+controlled by setting those parameter values.
+The <code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code> method operates using the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.argmax.html#numpy.argmax" title="(in NumPy v1.20)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.argmax()</span></code></a>
+function on the outputs of <a class="reference internal" href="#fuzzytree.FuzzyDecisionTreeClassifier.predict_proba" title="fuzzytree.FuzzyDecisionTreeClassifier.predict_proba"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba()</span></code></a>. This means that in
+case the highest predicted probabilities are tied, the classifier will
+predict the tied class with the lowest index in <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-classes_" title="(in scikit-learn v0.24)"><span class="xref std std-term">classes_</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>classes_</strong><span class="classifier">ndarray of shape (n_classes,)</span></dt><dd><p>The classes labels.</p>
+</dd>
+<dt><strong>n_classes_</strong><span class="classifier">int or list of int</span></dt><dd><p>The number of classes (for single output problems),
+or a list containing the number of classes for each
+output (for multi-output problems).</p>
+</dd>
+<dt><strong>n_features_</strong><span class="classifier">int</span></dt><dd><p>The number of features when <code class="docutils literal notranslate"><span class="pre">fit</span></code> is performed.</p>
+</dd>
+<dt><strong>n_outputs_</strong><span class="classifier">int</span></dt><dd><p>The number of outputs when <code class="docutils literal notranslate"><span class="pre">fit</span></code> is performed. Currently, always equals 1.</p>
+</dd>
+<dt><strong>tree_</strong><span class="classifier">FuzzyTree</span></dt><dd><p>The underlying Tree object. Please refer to
+<code class="docutils literal notranslate"><span class="pre">help(fuzzytree._fuzzy_tree.FuzzyTree)</span></code> for attributes of Tree object and
+for basic usage of these attributes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fuzzytree.FuzzyDecisionTreeClassifier.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fuzziness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_membership_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_membership_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fuzzytree/_classes.html#FuzzyDecisionTreeClassifier.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fuzzytree.FuzzyDecisionTreeClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fuzzytree.FuzzyDecisionTreeClassifier.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fuzzytree/_classes.html#FuzzyDecisionTreeClassifier.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fuzzytree.FuzzyDecisionTreeClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a fuzzy decision tree classifier from the training set (X, y).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">array-like of shape (n_samples, n_features)</span></dt><dd><p>The training input samples. Internally, it will be converted to
+<code class="docutils literal notranslate"><span class="pre">dtype=np.float64</span></code>.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array-like of shape (n_samples,)</span></dt><dd><p>The target values (class labels) as integers or strings. Internally,
+it will be converted to an array-like of integers.</p>
+</dd>
+<dt><strong>sample_weight</strong><span class="classifier">array-like of shape (n_samples,), default=None</span></dt><dd><p>Sample weights used as initial membership function for samples.
+If None, then samples are equally weighted. Splits
+that would create child nodes with net zero membership are
+ignored while searching for a split in each node.</p>
+</dd>
+<dt><strong>check_input</strong><span class="classifier">bool, default=True</span></dt><dd><p>Allow to bypass several input checking.
+Don’t use this parameter unless you know what you do.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self</strong><span class="classifier">FuzzyDecisionTreeClassifier</span></dt><dd><p>Fitted estimator.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fuzzytree.FuzzyDecisionTreeClassifier.predict_log_proba">
+<span class="sig-name descname"><span class="pre">predict_log_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fuzzytree/_classes.html#FuzzyDecisionTreeClassifier.predict_log_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fuzzytree.FuzzyDecisionTreeClassifier.predict_log_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class log-probabilities of the input samples X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">array-like of shape (n_samples, n_features)</span></dt><dd><p>The input samples. Internally, it will be converted to
+<code class="docutils literal notranslate"><span class="pre">dtype=np.float64</span></code>.</p>
+</dd>
+<dt><strong>check_input</strong><span class="classifier">bool, default=True</span></dt><dd><p>Allow to bypass several input checking.
+Don’t use this parameter unless you know what you do.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>proba</strong><span class="classifier">ndarray of shape (n_samples, n_classes)</span></dt><dd><p>The class log-probabilities of the input samples. The order of the
+classes corresponds to that in the attribute <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-classes_" title="(in scikit-learn v0.24)"><span class="xref std std-term">classes_</span></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fuzzytree.FuzzyDecisionTreeClassifier.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fuzzytree/_classes.html#FuzzyDecisionTreeClassifier.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fuzzytree.FuzzyDecisionTreeClassifier.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class probabilities of the input samples X.
+The predicted class probability is the fraction of membership of samples
+of the same class in a leaf.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">array-like of shape (n_samples, n_features)</span></dt><dd><p>The input samples. Internally, it will be converted to
+<code class="docutils literal notranslate"><span class="pre">dtype=np.float64</span></code>.</p>
+</dd>
+<dt><strong>check_input</strong><span class="classifier">bool, default=True</span></dt><dd><p>Allow to bypass several input checking.
+Don’t use this parameter unless you know what you do.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>proba</strong><span class="classifier">ndarray of shape (n_samples, n_classes)</span></dt><dd><p>The class probabilities of the input samples. The order of the
+classes corresponds to that in the attribute <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-classes_" title="(in scikit-learn v0.24)"><span class="xref std std-term">classes_</span></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="examples-using-fuzzytree-fuzzydecisiontreeclassifier">
+<h2>Examples using <code class="docutils literal notranslate"><span class="pre">fuzzytree.FuzzyDecisionTreeClassifier</span></code><a class="headerlink" href="#examples-using-fuzzytree-fuzzydecisiontreeclassifier" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="An example plot of FuzzyDecisionTreeClassifier"><div class="figure align-default" id="id1">
+<img alt="Plotting Fuzzy Decision Tree Classifier" src="../_images/sphx_glr_plot_classifier_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../auto_examples/plot_classifier.html#sphx-glr-auto-examples-plot-classifier-py"><span class="std std-ref">Plotting Fuzzy Decision Tree Classifier</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A comparison plot for FuzzyDecisionTreeClassifier and sklearn&#x27;s DecisionTreeClassifier on datas..."><div class="figure align-default" id="id2">
+<img alt="Comparison of crisp and fuzzy classifiers on make_moons dataset" src="../_images/sphx_glr_plot_moons_comparison_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../auto_examples/plot_moons_comparison.html#sphx-glr-auto-examples-plot-moons-comparison-py"><span class="std std-ref">Comparison of crisp and fuzzy classifiers on make_moons dataset</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A comparison plot for FuzzyDecisionTreeClassifier and sklearn&#x27;s DecisionTreeClassifier on datas..."><div class="figure align-default" id="id3">
+<img alt="Comparison of crisp and fuzzy classifiers on make_circles dataset" src="../_images/sphx_glr_plot_circle_comparison_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../auto_examples/plot_circle_comparison.html#sphx-glr-auto-examples-plot-circle-comparison-py"><span class="std std-ref">Comparison of crisp and fuzzy classifiers on make_circles dataset</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A comparison plot for FuzzyDecisionTreeClassifier and sklearn&#x27;s DecisionTreeClassifier on datas..."><div class="figure align-default" id="id4">
+<img alt="Comparison of crisp and fuzzy classifiers on make_blobs dataset" src="../_images/sphx_glr_plot_blobs_comparison_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../auto_examples/plot_blobs_comparison.html#sphx-glr-auto-examples-plot-blobs-comparison-py"><span class="std std-ref">Comparison of crisp and fuzzy classifiers on make_blobs dataset</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="A comparison plot for FuzzyDecisionTreeClassifier and sklearn&#x27;s DecisionTreeClassifier on iris ..."><div class="figure align-default" id="id5">
+<img alt="Comparison of crisp and fuzzy classifiers on iris dataset" src="../_images/sphx_glr_plot_iris_comparison_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="../auto_examples/plot_iris_comparison.html#sphx-glr-auto-examples-plot-iris-comparison-py"><span class="std std-ref">Comparison of crisp and fuzzy classifiers on iris dataset</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div><div style='clear:both'></div></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../auto_examples/index.html" class="btn btn-neutral float-right" title="General examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../api.html" class="btn btn-neutral float-left" title="fuzzytree API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Jakub Balinski.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
