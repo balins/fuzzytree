@@ -132,7 +132,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
             raise NotImplementedError("Regression trees are not currently supported.")
 
         if is_classifier(self):
-            self.tree_ = FuzzyTree(self.y_, sample_weight, self.n_classes_)
+            self.tree_ = FuzzyTree(self.y_, sample_weight)
         else:
             raise NotImplementedError("Regression trees are not currently supported.")
 

@@ -1,6 +1,6 @@
 import numpy as np
 
-from ._utils import split_by_membership, membership_ratio
+from ._utils import membership_ratio
 
 
 def gini_index(y, membership, new_membership):
@@ -91,12 +91,12 @@ def impurity_decrease(y, membership, new_membership, criterion):
     -------
     float : decrease of impurity measured by given criterion
     """
-    membership_true, indices_true = split_by_membership(membership, new_membership)
-    membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
+    membership_true = membership * new_membership
+    membership_false = membership * (1. - new_membership)
 
     information_gain_ = criterion(y, membership) \
-                        - membership_true.sum() / membership.sum() * criterion(y[indices_true], membership_true) \
-                        - membership_false.sum() / membership.sum() * criterion(y[indices_false], membership_false)
+                        - membership_true.sum() / membership.sum() * criterion(y, membership_true) \
+                        - membership_false.sum() / membership.sum() * criterion(y, membership_false)
 
     return information_gain_
 
@@ -139,8 +139,9 @@ def entropy(y, membership):
     float : impurity measured by entropy
     """
     mr = membership_ratio(y, membership)
+    mr_nonzero = mr[mr != 0.]
 
-    entropy_ = -np.sum(mr * np.log(mr))
+    entropy_ = -np.sum(mr_nonzero * np.log(mr_nonzero))
 
     return entropy_
 
