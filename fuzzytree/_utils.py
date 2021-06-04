@@ -17,8 +17,9 @@ def membership_ratio(y, membership):
     membership_by_class : array-like of float of shape (len(np.unique(y)),)
         The membership ratio for each class in np.unique(y).
     """
-    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in np.unique(y)])
-    membership_by_class /= membership_by_class.sum(initial=1.)
+    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in set(y)])
+    if membership_by_class.sum() > 0.:
+        membership_by_class /= membership_by_class.sum()
 
     return membership_by_class
 
@@ -47,14 +48,14 @@ def s_shaped_membership(universe, a, b):
     .. [1] J. Warner, scikit-fuzzy Python module.
        See https://scikit-fuzzy.github.io/scikit-fuzzy/_modules/skfuzzy/membership/generatemf.html#smf
     """
-    s_func = np.ones(len(universe))
+    s_func = np.ones_like(universe)
     idx = universe <= a
-    s_func[idx] = 0
+    s_func[idx] = 0.
 
     idx = np.logical_and(a <= universe, universe <= (a + b) / 2.)
     s_func[idx] = 2. * ((universe[idx] - a) / (b - a)) ** 2.
 
     idx = np.logical_and((a + b) / 2. <= universe, universe <= b)
-    s_func[idx] = 1 - 2. * ((universe[idx] - b) / (b - a)) ** 2.
+    s_func[idx] = 1. - 2. * ((universe[idx] - b) / (b - a)) ** 2.
 
     return s_func

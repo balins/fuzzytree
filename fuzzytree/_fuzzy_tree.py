@@ -1,5 +1,3 @@
-import numpy as np
-
 from ._utils import membership_ratio
 
 
@@ -142,15 +140,9 @@ class FuzzyTree:
 
         membership_true = membership * new_membership
         membership_false = membership * (1. - new_membership)
-        indices_true = np.flatnonzero(membership_true)
-        indices_false = np.flatnonzero(membership_false)
 
-        prediction = np.zeros((X.shape[0], self.n_classes))
-
-        if indices_true.size > 0:
-            prediction = self.true_branch.predict(X, membership_true)
-        if indices_false.size > 0:
-            prediction += self.false_branch.predict(X, membership_false)
+        prediction = self.true_branch.predict(X, membership_true)
+        prediction += self.false_branch.predict(X, membership_false)
 
         return prediction
 

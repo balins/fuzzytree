@@ -83,6 +83,9 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
         return indices, sample_weight
 
     def fit(self, X, y, sample_weight=None, check_input=True):
+        if y is None:
+            raise ValueError("`fit` requires y not to be None")
+
         if check_input:
             X, y = check_X_y(X, y, estimator=self)
 
@@ -192,8 +195,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
     def _get_tags(self):
         return {
             **super()._get_tags(),
-            "requires_positive_X": False,
-            "requires_y": True,
+            "requires_y": True
         }
 
 
