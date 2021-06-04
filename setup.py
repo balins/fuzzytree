@@ -15,11 +15,11 @@ with open('README.rst') as f:
     LONG_DESCRIPTION = f.read()
 MAINTAINER = 'J. Balinski'
 MAINTAINER_EMAIL = 'balinski.jakub@gmail.com'
-URL = 'https://balins.github.io/fuzzytree/index.html'
+URL = 'https://balins.github.io/fuzzytree'
 DOWNLOAD_URL = 'https://pypi.org/project/fuzzytree'
 PROJECT_URLS = {
     'Bug Tracker': 'https://github.com/balins/fuzzytree/issues',
-    'Documentation': 'https://balins.github.io/fuzzytree/index.html',
+    'Documentation': 'https://balins.github.io/fuzzytree',
     'Source Code': 'https://github.com/balins/fuzzytree'
 }
 LICENSE = 'new BSD'

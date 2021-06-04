@@ -1,6 +1,4 @@
-import numpy as np
-
-from ._utils import split_by_membership, membership_ratio
+from ._utils import membership_ratio
 
 
 class FuzzyTreeBuilder:
@@ -52,29 +50,32 @@ class FuzzyTreeBuilder:
         membership : array-like of shape (n_samples,)
             The membership of each sample.
         """
-        self._build(tree, X, y, membership, 0)
+        self.X = X
+        self.y = y
+        self._build(tree, membership, 0)
 
-    def _build(self, tree, X, y, membership, depth):
-        if depth >= self.max_depth or membership.sum() < self.min_membership_split:
+    def _build(self, tree, membership, depth):
+        unique_cls = set(self.y[membership != 0.])
+        if depth >= self.max_depth or len(unique_cls) <= 1 or membership.sum() < self.min_membership_split:
             return
 
-        rule, gain = self.splitter.node_split(X, y, membership)
+        rule, gain = self.splitter.node_split(self.X, self.y, membership)
         if not rule or gain < self.min_impurity_decrease:
             return
 
-        new_membership = rule.evaluate(X)
-        membership_true, indices_true = split_by_membership(membership, new_membership)
-        membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
+        new_membership = rule.evaluate(self.X)
+        membership_true = membership * new_membership
+        membership_false = membership * (1. - new_membership)
 
         if min(membership_false.sum(), membership_true.sum()) < self.min_membership_leaf:
             return
 
         tree.rule = rule
-        tree.true_branch = FuzzyTree(y[indices_true], membership_true, tree.n_classes, depth + 1)
-        tree.false_branch = FuzzyTree(y[indices_false], membership_false, tree.n_classes, depth + 1)
+        tree.true_branch = FuzzyTree(self.y, membership_true, depth + 1)
+        tree.false_branch = FuzzyTree(self.y, membership_false, depth + 1)
 
-        self._build(tree.true_branch, X[indices_true], y[indices_true], membership_true, depth + 1)
-        self._build(tree.false_branch, X[indices_false], y[indices_false], membership_false, depth + 1)
+        self._build(tree.true_branch, membership_true, depth + 1)
+        self._build(tree.false_branch, membership_false, depth + 1)
 
 
 class FuzzyTree:
@@ -87,8 +88,8 @@ class FuzzyTree:
     membership : array-like of shape (n_samples,)
         The membership of samples that respective labels are
         coming from.
-    n_classes : int
-        The total number of possible classes.
+    level : int
+        Depth of the node.
     rule : FuzzyDecisionRule, default=None
         The rule that was used to split this node. If None,
         then the node is a leaf.
@@ -108,13 +109,13 @@ class FuzzyTree:
         The membership ratio for each labels of n_classes.
     """
 
-    def __init__(self, y, membership, n_classes, level=0, rule=None, true_branch=None, false_branch=None):
-        self.class_weights = membership_ratio(y, membership, np.arange(n_classes))
-        self.n_classes = n_classes
+    def __init__(self, y, membership, level=0, rule=None, true_branch=None, false_branch=None):
+        self.class_weights = membership_ratio(y, membership)
         self.level = level
         self.rule = rule
         self.true_branch = true_branch
         self.false_branch = false_branch
+        self.n_classes = y.max() + 1
 
     def predict(self, X, membership):
         """Predict labels of each sample in X.
@@ -136,15 +137,12 @@ class FuzzyTree:
 
     def _predict_internal(self, X, membership):
         new_membership = self.rule.evaluate(X)
-        membership_true, indices_true = split_by_membership(membership, new_membership)
-        membership_false, indices_false = split_by_membership(membership, 1. - new_membership)
 
-        prediction = np.zeros((X.shape[0], self.n_classes))
+        membership_true = membership * new_membership
+        membership_false = membership * (1. - new_membership)
 
-        if indices_true.size > 0:
-            prediction[indices_true] = self.true_branch.predict(X[indices_true], membership_true)
-        if indices_false.size > 0:
-            prediction[indices_false] += self.false_branch.predict(X[indices_false], membership_false)
+        prediction = self.true_branch.predict(X, membership_true)
+        prediction += self.false_branch.predict(X, membership_false)
 
         return prediction
 

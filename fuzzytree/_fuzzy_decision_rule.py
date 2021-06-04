@@ -36,7 +36,7 @@ class FuzzyDecisionRule:
         a = split_val - margin_width
         b = split_val + margin_width
 
-        self.universe = np.linspace(min_, max_, 300)
+        self.universe = np.linspace(min_, max_, 100)
         self.membership = s_shaped_membership(self.universe, a, b)
 
     def evaluate(self, X):
@@ -63,11 +63,11 @@ class FuzzyDecisionRule:
         if n_samples == 0:
             return np.array([])
 
-        membership = self.evaluate_(X[:, self.feature_idx])
+        membership = self._evaluate(X[:, self.feature_idx])
 
         return membership
 
-    def evaluate_(self, x):
+    def _evaluate(self, x):
         return np.interp(x, self.universe, self.membership)
 
     def __str__(self):
