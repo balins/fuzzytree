@@ -33,21 +33,8 @@ An example plot of :class:`FuzzyDecisionTreeClassifier`
     :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /opt/hostedtoolcache/Python/3.9.5/x64/lib/python3.9/site-packages/mlxtend/plotting/decision_regions.py:275: UserWarning: You passed a edgecolor/edgecolors ('black') for an unfilled marker ('x').  Matplotlib is ignoring the edgecolor in favor of the facecolor.  This behavior may change in the future.
-      ax.scatter(x=x_data,
 
 
-
-
-
-
-|
 
 .. code-block:: default
 
@@ -57,23 +44,23 @@ An example plot of :class:`FuzzyDecisionTreeClassifier`
 
     from fuzzytree import FuzzyDecisionTreeClassifier
 
-    X, y = make_blobs(n_samples=300, n_features=2, centers=[[-23, -12], [12, 42], [52, 2], [-18, 41]],
-                      cluster_std=[10, 25, 12, 11], random_state=42)
+    X, y = make_blobs(n_samples=300, n_features=2,
+                      centers=[[10, 0], [20, 30], [40, 5]],
+                      cluster_std=[7, 11, 13], random_state=42)
 
     clf = FuzzyDecisionTreeClassifier().fit(X, y)
 
-    ax = plt.plot()
-    fig = plot_decision_regions(X=X, y=y, clf=clf, legend=2)
+    plot_decision_regions(X=X, y=y, clf=clf, legend=2)
     plt.title("Fuzzy Tree Classification on blobs")
-    plt.xlabel('Feature 1')
-    plt.ylabel('Feature 2')
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
 
     plt.show()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.576 seconds)
+   **Total running time of the script:** ( 0 minutes  7.348 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_classifier.py:

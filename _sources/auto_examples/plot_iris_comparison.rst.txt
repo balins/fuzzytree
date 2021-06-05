@@ -26,12 +26,12 @@ A comparison plot for :class:`FuzzyDecisionTreeClassifier`
 and sklearn's :class:`DecisionTreeClassifier` on iris
 dataset (only two features were selected)
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-50
+.. GENERATED FROM PYTHON SOURCE LINES 10-45
 
 
 
 .. image:: /auto_examples/images/sphx_glr_plot_iris_comparison_001.png
-    :alt: Fuzzy Decision Tree (train), sklearn Decision Tree (train), Fuzzy Decision Tree (test), sklearn Decision Tree (test)
+    :alt: Fuzzy Decision Tree (train), Fuzzy Decision Tree (test), sklearn Decision Tree (train), sklearn Decision Tree (test)
     :class: sphx-glr-single-img
 
 
@@ -41,8 +41,8 @@ dataset (only two features were selected)
 .. code-block:: default
 
 
-    import matplotlib.gridspec as gridspec
     import matplotlib.pyplot as plt
+    from matplotlib import gridspec
     from mlxtend.plotting import plot_decision_regions
     from sklearn.datasets import load_iris
     from sklearn.model_selection import train_test_split
@@ -63,20 +63,15 @@ dataset (only two features were selected)
 
     gs = gridspec.GridSpec(2, 2)
     fig = plt.figure(figsize=(10, 8))
-    labels = ['Fuzzy Decision Tree', 'sklearn Decision Tree']
-    for clf, lab, grd in zip([clf_fuzz, clf_sk],
-                             labels, [[0, 0], [0, 1]]):
-        ax = plt.subplot(gs[grd[0], grd[1]])
-        fig = plot_decision_regions(X=X_train, y=y_train, clf=clf, legend=2)
-        plt.xlabel(iris.feature_names[features[0]])
-        plt.ylabel(iris.feature_names[features[1]])
+    labels = ["Fuzzy Decision Tree", "sklearn Decision Tree"]
+
+    for clf, lab, grd in zip([clf_fuzz, clf_sk], labels, [[0, 0], [0, 1]]):
+        plt.subplot(gs[grd[0], grd[1]])
+        plot_decision_regions(X=X_train, y=y_train, clf=clf, legend=2)
         plt.title("%s (train)" % lab)
-    for clf, lab, grd in zip([clf_fuzz, clf_sk],
-                             labels, [[1, 0], [1, 1]]):
-        ax = plt.subplot(gs[grd[0], grd[1]])
-        fig = plot_decision_regions(X=X_test, y=y_test, clf=clf, legend=2)
-        plt.xlabel(iris.feature_names[features[0]])
-        plt.ylabel(iris.feature_names[features[1]])
+
+        plt.subplot(gs[grd[0] + 1, grd[1]])
+        plot_decision_regions(X=X_test, y=y_test, clf=clf, legend=2)
         plt.title("%s (test)" % lab)
 
     plt.show()
@@ -84,7 +79,7 @@ dataset (only two features were selected)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.508 seconds)
+   **Total running time of the script:** ( 0 minutes  3.011 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_iris_comparison.py:
