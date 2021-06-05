@@ -17,11 +17,32 @@ def membership_ratio(y, membership):
     membership_by_class : array-like of float of shape (len(np.unique(y)),)
         The membership ratio for each class in np.unique(y).
     """
-    membership_by_class = np.array([np.sum(membership[y == cls]) for cls in set(y)])
-    if membership_by_class.sum() > 0.:
+
+    membership_by_class = np.bincount(y, weights=membership)
+    if membership_by_class.any():
         membership_by_class /= membership_by_class.sum()
 
     return membership_by_class
+
+
+def joint_membership(a, b):
+    """Calculate the joint membership of arrays.
+
+    Parameters
+    ----------
+    a : array-like of shape (n_samples,)
+        The first array of membership.
+    b : array-like of shape (n_samples,)
+        The second array of membership.
+
+    Returns
+    -------
+    joint_membership_ : array-like of float of shape (n_samples,)
+        The joint membership of a and b.
+    """
+    joint_membership_ = a * b
+
+    return joint_membership_
 
 
 def s_shaped_membership(universe, a, b):
@@ -50,12 +71,12 @@ def s_shaped_membership(universe, a, b):
     """
     s_func = np.ones_like(universe)
     idx = universe <= a
-    s_func[idx] = 0.
+    s_func[idx] = 0
 
-    idx = np.logical_and(a <= universe, universe <= (a + b) / 2.)
-    s_func[idx] = 2. * ((universe[idx] - a) / (b - a)) ** 2.
+    idx = np.logical_and(a <= universe, universe <= (a + b) / 2)
+    s_func[idx] = 2 * ((universe[idx] - a) / (b - a)) ** 2
 
-    idx = np.logical_and((a + b) / 2. <= universe, universe <= b)
-    s_func[idx] = 1. - 2. * ((universe[idx] - b) / (b - a)) ** 2.
+    idx = np.logical_and((a + b) / 2 <= universe, universe <= b)
+    s_func[idx] = 1 - 2 * ((universe[idx] - b) / (b - a)) ** 2
 
     return s_func
