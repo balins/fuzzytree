@@ -4,7 +4,6 @@ decision tree classification is supported.
 """
 
 from abc import ABCMeta, abstractmethod
-from sys import getrecursionlimit
 
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin, is_classifier
@@ -108,13 +107,13 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
         else:
             raise NotImplementedError("Regression trees are not currently supported.")
 
-        max_depth = (getrecursionlimit() if self.max_depth is None
+        max_depth = (float('inf') if self.max_depth is None
                      else self.max_depth)
 
-        if not self.min_membership_leaf > 0.:
+        if not self.min_membership_leaf > 0:
             raise ValueError("min_membership_leaf must be greater than 0.0, got %s" % self.min_membership_leaf)
 
-        if not self.min_membership_split > 0.:
+        if not self.min_membership_split > 0:
             raise ValueError("min_membership_split must be greater than 0.0, got %s" % self.min_membership_split)
 
         min_membership_split = max(self.min_membership_split, 2 * self.min_membership_leaf)
@@ -125,7 +124,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
         if max_depth <= 0:
             raise ValueError("max_depth must be greater than zero")
 
-        if self.min_impurity_decrease < 0.:
+        if self.min_impurity_decrease < 0:
             raise ValueError("min_impurity_decrease must be greater than "
                              "or equal to 0")
 

@@ -1,4 +1,8 @@
-from ._utils import membership_ratio
+from collections import deque
+
+import numpy as np
+
+from ._utils import membership_ratio, joint_membership
 
 
 class FuzzyTreeBuilder:
@@ -37,8 +41,6 @@ class FuzzyTreeBuilder:
 
     def build(self, tree, X, y, membership):
         """Build a fuzzy decision tree.
-        Currently, uses calls to ``_build`` method to build
-        left and right branches recursively.
 
         Parameters
         ----------
@@ -50,32 +52,30 @@ class FuzzyTreeBuilder:
         membership : array-like of shape (n_samples,)
             The membership of each sample.
         """
-        self.X = X
-        self.y = y
-        self._build(tree, membership, 0)
+        stack = deque()
+        stack.append((tree, membership))
 
-    def _build(self, tree, membership, depth):
-        unique_cls = set(self.y[membership != 0.])
-        if depth >= self.max_depth or len(unique_cls) <= 1 or membership.sum() < self.min_membership_split:
-            return
+        while stack:
+            tree, membership = stack.pop()
 
-        rule, gain = self.splitter.node_split(self.X, self.y, membership)
-        if not rule or gain < self.min_impurity_decrease:
-            return
+            unique_cls = np.unique(y[membership.nonzero()])
+            if tree.level >= self.max_depth \
+                    or unique_cls.shape[0] <= 1 or \
+                    membership.sum() < self.min_membership_split:
+                continue
 
-        new_membership = rule.evaluate(self.X)
-        membership_true = membership * new_membership
-        membership_false = membership * (1. - new_membership)
+            rule, membership_true, membership_false, gain = self.splitter.node_split(X, y, membership)
+            if not rule \
+                    or gain < self.min_impurity_decrease \
+                    or min(membership_false.sum(), membership_true.sum()) < self.min_membership_leaf:
+                continue
 
-        if min(membership_false.sum(), membership_true.sum()) < self.min_membership_leaf:
-            return
+            tree.rule = rule
+            tree.true_branch = FuzzyTree(y, membership_true, tree.level + 1)
+            tree.false_branch = FuzzyTree(y, membership_false, tree.level + 1)
 
-        tree.rule = rule
-        tree.true_branch = FuzzyTree(self.y, membership_true, depth + 1)
-        tree.false_branch = FuzzyTree(self.y, membership_false, depth + 1)
-
-        self._build(tree.true_branch, membership_true, depth + 1)
-        self._build(tree.false_branch, membership_false, depth + 1)
+            stack.append((tree.true_branch, membership_true))
+            stack.append((tree.false_branch, membership_false))
 
 
 class FuzzyTree:
@@ -115,7 +115,6 @@ class FuzzyTree:
         self.rule = rule
         self.true_branch = true_branch
         self.false_branch = false_branch
-        self.n_classes = y.max() + 1
 
     def predict(self, X, membership):
         """Predict labels of each sample in X.
@@ -138,16 +137,20 @@ class FuzzyTree:
     def _predict_internal(self, X, membership):
         new_membership = self.rule.evaluate(X)
 
-        membership_true = membership * new_membership
-        membership_false = membership * (1. - new_membership)
+        membership_true = joint_membership(membership, new_membership)
+        membership_false = joint_membership(membership, 1 - new_membership)
 
-        prediction = self.true_branch.predict(X, membership_true)
-        prediction += self.false_branch.predict(X, membership_false)
+        prediction = np.zeros((X.shape[0], self.class_weights.shape[0]))
+
+        if membership_true.any():
+            prediction = self.true_branch.predict(X, membership_true)
+        if membership_false.any():
+            prediction += self.false_branch.predict(X, membership_false)
 
         return prediction
 
     def _predict_leaf(self, membership):
-        return membership[:, None] * self.class_weights
+        return joint_membership(membership[:, None], self.class_weights)
 
     @property
     def max_depth(self):
