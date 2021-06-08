@@ -12,5 +12,5 @@ decision trees. Its API is fully compatible with scikit-learn_.
 Refer to the documentation_ to find usage guide and some examples.
 
 Requirements
-    * scikit-learn >= 0.23.0
+    * scikit-learn >= 0.24.0
     * numpy >= 13.3.3
