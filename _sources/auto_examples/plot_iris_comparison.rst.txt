@@ -79,7 +79,7 @@ dataset (only two features were selected)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.522 seconds)
+   **Total running time of the script:** ( 0 minutes  2.532 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_iris_comparison.py:
