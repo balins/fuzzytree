@@ -5,16 +5,16 @@
 
 Computation times
 =================
-**00:52.179** total execution time for **auto_examples** files:
+**00:46.804** total execution time for **auto_examples** files:
 
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_moons_comparison.py` (``plot_moons_comparison.py``)   | 00:16.928 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_plot_moons_comparison.py` (``plot_moons_comparison.py``)   | 00:15.322 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_classifier.py` (``plot_classifier.py``)               | 00:11.820 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_plot_classifier.py` (``plot_classifier.py``)               | 00:10.205 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_circle_comparison.py` (``plot_circle_comparison.py``) | 00:08.486 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_plot_circle_comparison.py` (``plot_circle_comparison.py``) | 00:07.644 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_blobs_comparison.py` (``plot_blobs_comparison.py``)   | 00:08.323 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_plot_blobs_comparison.py` (``plot_blobs_comparison.py``)   | 00:07.630 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_iris_comparison.py` (``plot_iris_comparison.py``)     | 00:06.622 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_plot_iris_comparison.py` (``plot_iris_comparison.py``)     | 00:06.003 | 0.0 MB |
 +-----------------------------------------------------------------------------------------+-----------+--------+
