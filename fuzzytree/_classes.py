@@ -129,7 +129,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
                              "or equal to 0")
 
         if is_classification:
-            splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness)
+            splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf)
         else:
             raise NotImplementedError("Regression trees are not currently supported.")
 
@@ -208,7 +208,7 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
 
     Parameters
     ----------
-    fuzziness : float, default=1.0
+    fuzziness : float, default=0.8
         The fuzziness parameter that controls softness of the tree between 0.
         (hard) and 1. (soft).
     criterion : {"gini", "entropy", "misclassification"}, default="gini"
@@ -270,7 +270,7 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
     """
 
     def __init__(self,
-                 fuzziness=1.,
+                 fuzziness=0.8,
                  criterion='gini',
                  max_depth=None,
                  min_membership_split=2.,

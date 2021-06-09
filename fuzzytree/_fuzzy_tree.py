@@ -65,9 +65,7 @@ class FuzzyTreeBuilder:
                 continue
 
             rule, membership_true, membership_false, gain = self.splitter.node_split(X, y, membership)
-            if not rule \
-                    or gain < self.min_impurity_decrease \
-                    or min(membership_false.sum(), membership_true.sum()) < self.min_membership_leaf:
+            if not rule or gain < self.min_impurity_decrease:
                 continue
 
             tree.rule = rule
