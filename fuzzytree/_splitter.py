@@ -14,11 +14,14 @@ class Splitter:
         Higher values indicate better split.
     fuzziness : float
         The fuzziness parameter between 0. (crisp) and 1. (fuzzy) split.
+    min_membership : float
+        The minimum sum of membership required to be a make a split.
     """
 
-    def __init__(self, gain_function, fuzziness):
+    def __init__(self, gain_function, fuzziness, min_membership):
         self.gain_function = gain_function
         self.fuzziness = fuzziness
+        self.min_membership = min_membership
         self._sorted_cols = None
 
     def node_split(self, X, y, membership):
@@ -57,6 +60,10 @@ class Splitter:
                 new_membership = rule.evaluate(X)
                 membership_true = joint_membership(membership, new_membership)
                 membership_false = joint_membership(membership, 1 - new_membership)
+
+                if min(membership_false.sum(), membership_true.sum()) < self.min_membership:
+                    continue
+
                 gain = self.gain_function(y, membership, membership_true, membership_false)
 
                 if gain > best_gain:
