@@ -13,8 +13,7 @@ DISTNAME = 'fuzzytree'
 DESCRIPTION = 'A scikit-learn compatible implementation of fuzzy decision tree estimator.'
 with open('README.rst') as f:
     LONG_DESCRIPTION = f.read()
-MAINTAINER = 'J. Balinski'
-MAINTAINER_EMAIL = 'balinski.jakub@gmail.com'
+AUTHOR = 'Jakub Baliński'
 URL = 'https://balins.github.io/fuzzytree'
 DOWNLOAD_URL = 'https://pypi.org/project/fuzzytree'
 PROJECT_URLS = {
@@ -56,8 +55,7 @@ EXTRAS_REQUIRE = {
 }
 
 setup(name=DISTNAME,
-      maintainer=MAINTAINER,
-      maintainer_email=MAINTAINER_EMAIL,
+      author=AUTHOR,
       description=DESCRIPTION,
       license=LICENSE,
       url=URL,
