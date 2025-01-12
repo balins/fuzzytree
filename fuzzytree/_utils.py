@@ -24,6 +24,27 @@ def membership_ratio(y, membership):
 
     return membership_by_class
 
+def weighted_mean(y, membership):
+    """
+    Calculate the weighted mean of the target values.
+
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        The array of continuous target values.
+    membership : array-like of shape (n_samples,)
+        The membership of each sample.
+
+    Returns
+    -------
+    weighted_mean : float
+        The weighted mean of the target values.
+    """
+    if membership.sum() == 0:
+        raise ValueError("Total membership sum cannot be zero.")
+
+    weighted_mean = np.sum(y * membership) / np.sum(membership)
+    return weighted_mean
 
 def joint_membership(a, b):
     """Calculate the joint membership of arrays.
