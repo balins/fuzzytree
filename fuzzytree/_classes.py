@@ -106,8 +106,6 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
             check_classification_targets(y)
             self.classes_, self.y_ = np.unique(y, return_inverse=True)
             self.n_classes_ = self.classes_.shape[0]
-        else:
-            pass
 
         max_depth = (float('inf') if self.max_depth is None
                      else self.max_depth)
@@ -130,10 +128,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
             raise ValueError("min_impurity_decrease must be greater than "
                              "or equal to 0")
 
-        if is_classification:
-            splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf)
-        else:
-            splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf)
+        splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf)
 
         if is_classifier(self):
             self.tree_ = FuzzyTree(self.y_, sample_weight)
