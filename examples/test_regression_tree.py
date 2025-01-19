@@ -3,7 +3,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
 from fuzzytree._classes import FuzzyDecisionTreeRegressor
-
+import matplotlib.pyplot as plt
 
 def generate_synthetic_data(n_samples=500, noise=0.1):
     """
@@ -45,7 +45,6 @@ def test_fuzzy_regression_tree():
     print(f"Mean Squared Error (MSE): {mse:.4f}")
     print(f"R-squared (R2): {r2:.4f}")
 
-    import matplotlib.pyplot as plt
     plt.scatter(X_test, y_test, color='blue', label='True Values')
     plt.scatter(X_test, y_pred, color='red', label='Predictions')
     plt.legend()

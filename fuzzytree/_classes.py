@@ -461,18 +461,6 @@ class FuzzyDecisionTreeRegressor(RegressorMixin, BaseFuzzyDecisionTree):
         predictions = self.tree_.predict(X, sample_weight)
         return predictions.flatten()
 
-    def predict_log_proba(self, X, check_input=True):
-
-        proba = self.predict_proba(X, check_input)
-
-        if is_classifier(self):
-            if self.n_outputs_ == 1:
-                return np.log(proba)
-            else:
-                raise ValueError("Multi-output problems are not currently supported.")
-        else:
-            raise NotImplementedError("Regression trees are not currently supported.")
-
     def _get_tags(self):
         return {
             **super()._get_tags(),
