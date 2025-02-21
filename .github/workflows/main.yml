@@ -7,46 +7,44 @@ env:
 
 jobs:
   main:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python: [3.7, 3.8, 3.9]
+        python: [3.11, 3.12, 3.13]
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v2.2.1
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements-dev.txt') }}
-          restore-keys: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements-dev.txt') }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ hashFiles('requirements-dev.txt') }}-
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt -r requirements-dev.txt
+        run: pip install -r requirements.txt -r requirements-dev.txt
+
       - name: Build package
-        run: |
-          pip install -e .
+        run: pip install -e .
+
       - name: Run tests
-        run: |
-          pytest fuzzytree
+        run: pytest fuzzytree
+
       - name: Build docs
-        if: |
-          matrix.os == 'ubuntu-latest' &&
-          matrix.python == 3.9
+        if: matrix.os == 'ubuntu-latest' && matrix.python == 3.13
         run: |
           make -C doc/ html
           touch doc/_build/html/.nojekyll
+
       - name: Deploy docs
-        uses: JamesIves/github-pages-deploy-action@4.1.3
-        if: |
-          matrix.os == 'ubuntu-latest' &&
-          matrix.python == 3.9
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: matrix.os == 'ubuntu-latest' && matrix.python == 3.13
         with:
           branch: gh-pages
           folder: doc/_build/html
