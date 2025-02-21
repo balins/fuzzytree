@@ -1,3 +1,11 @@
+"""
+===============================================================
+Fuzzy Regression Tree example
+===============================================================
+
+Example plot for :class:`FuzzyDecisionTreeRegressor` generated on synthetic data.
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import mean_squared_error, r2_score
