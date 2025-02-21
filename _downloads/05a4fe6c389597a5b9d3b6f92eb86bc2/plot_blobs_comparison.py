@@ -17,10 +17,16 @@ from sklearn.tree import DecisionTreeClassifier
 
 from fuzzytree import FuzzyDecisionTreeClassifier
 
-X, y = make_blobs(n_samples=150, n_features=2,
-                  centers=[[0, 5], [10, 20], [20, 5]],
-                  cluster_std=[10, 5, 10], random_state=42)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X, y = make_blobs(
+    n_samples=150,
+    n_features=2,
+    centers=[[0, 5], [10, 20], [20, 5]],
+    cluster_std=[10, 5, 10],
+    random_state=42,
+)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 clf_fuzz = FuzzyDecisionTreeClassifier().fit(X_train, y_train)
 clf_sk = DecisionTreeClassifier().fit(X_train, y_train)

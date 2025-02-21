@@ -3,18 +3,50 @@
 
 .. _sphx_glr_auto_examples_sg_execution_times:
 
+
 Computation times
 =================
-**00:46.804** total execution time for **auto_examples** files:
+**00:30.079** total execution time for 6 files **from auto_examples**:
 
-+-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_moons_comparison.py` (``plot_moons_comparison.py``)   | 00:15.322 | 0.0 MB |
-+-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_classifier.py` (``plot_classifier.py``)               | 00:10.205 | 0.0 MB |
-+-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_circle_comparison.py` (``plot_circle_comparison.py``) | 00:07.644 | 0.0 MB |
-+-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_blobs_comparison.py` (``plot_blobs_comparison.py``)   | 00:07.630 | 0.0 MB |
-+-----------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_plot_iris_comparison.py` (``plot_iris_comparison.py``)     | 00:06.003 | 0.0 MB |
-+-----------------------------------------------------------------------------------------+-----------+--------+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_auto_examples_plot_moons_comparison.py` (``plot_moons_comparison.py``)
+     - 00:09.961
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_plot_classifier.py` (``plot_classifier.py``)
+     - 00:06.120
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_plot_circle_comparison.py` (``plot_circle_comparison.py``)
+     - 00:05.069
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_plot_blobs_comparison.py` (``plot_blobs_comparison.py``)
+     - 00:04.979
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_plot_iris_comparison.py` (``plot_iris_comparison.py``)
+     - 00:03.950
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_regression_tree.py` (``regression_tree.py``)
+     - 00:00.000
+     - 0.0

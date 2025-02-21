@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_auto_examples_plot_classifier.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_auto_examples_plot_classifier.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -24,19 +24,21 @@ Plotting Fuzzy Decision Tree Classifier
 
 An example plot of :class:`FuzzyDecisionTreeClassifier`
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-26
+.. GENERATED FROM PYTHON SOURCE LINES 8-31
 
 
 
-.. image:: /auto_examples/images/sphx_glr_plot_classifier_001.png
-    :alt: Fuzzy Tree Classification on blobs
-    :class: sphx-glr-single-img
+.. image-sg:: /auto_examples/images/sphx_glr_plot_classifier_001.png
+   :alt: Fuzzy Tree Classification on blobs
+   :srcset: /auto_examples/images/sphx_glr_plot_classifier_001.png
+   :class: sphx-glr-single-img
 
 
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     from matplotlib import pyplot as plt
     from mlxtend.plotting import plot_decision_regions
@@ -44,9 +46,13 @@ An example plot of :class:`FuzzyDecisionTreeClassifier`
 
     from fuzzytree import FuzzyDecisionTreeClassifier
 
-    X, y = make_blobs(n_samples=300, n_features=2,
-                      centers=[[10, 0], [20, 30], [40, 5]],
-                      cluster_std=[7, 11, 13], random_state=42)
+    X, y = make_blobs(
+        n_samples=300,
+        n_features=2,
+        centers=[[10, 0], [20, 30], [40, 5]],
+        cluster_std=[7, 11, 13],
+        random_state=42,
+    )
 
     clf = FuzzyDecisionTreeClassifier().fit(X, y)
 
@@ -60,28 +66,26 @@ An example plot of :class:`FuzzyDecisionTreeClassifier`
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.205 seconds)
+   **Total running time of the script:** (0 minutes 6.120 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_classifier.py:
 
+.. only:: html
 
-.. only :: html
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
+      :download:`Download Jupyter notebook: plot_classifier.ipynb <plot_classifier.ipynb>`
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: plot_classifier.py <plot_classifier.py>`
 
-     :download:`Download Python source code: plot_classifier.py <plot_classifier.py>`
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_classifier.ipynb <plot_classifier.ipynb>`
+      :download:`Download zipped: plot_classifier.zip <plot_classifier.zip>`
 
 
 .. only:: html

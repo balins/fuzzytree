@@ -1,222 +1,142 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>fuzzytree._classes &mdash; fuzzytree 0.1.4 documentation</title>
-  
+  <title>fuzzytree._classes &mdash; fuzzytree 0.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/fuzzytree.css?v=d1d1afb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
 
   
-  <link rel="stylesheet" href="../../_static/css/fuzzytree.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/fuzzytree.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/js/copybutton.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+      <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/copybutton.js?v=26522df0"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> fuzzytree
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            fuzzytree
           </a>
-
-          
-            
-            
-              <div class="version">
-                0.1.4
-              </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../quick_start.html">Quick Start with fuzzytree</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">User guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">fuzzytree API</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Examples</span></p>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">General examples</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">fuzzytree</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>fuzzytree._classes</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">fuzzytree._classes</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for fuzzytree._classes</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module gathers fuzzy tree-based methods. Currently, only single-output</span>
 <span class="sd">decision tree classification is supported.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">is_classifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.multiclass</span> <span class="kn">import</span> <span class="n">check_classification_targets</span>
-<span class="kn">from</span> <span class="nn">sklearn.utils.validation</span> <span class="kn">import</span> <span class="n">check_X_y</span><span class="p">,</span> <span class="n">check_is_fitted</span><span class="p">,</span> <span class="n">_check_sample_weight</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">RegressorMixin</span><span class="p">,</span> <span class="n">is_classifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_classification_targets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_check_sample_weight</span><span class="p">,</span>
+    <span class="n">check_is_fitted</span><span class="p">,</span>
+    <span class="n">check_X_y</span><span class="p">,</span>
+    <span class="n">validate_data</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_criterion</span>
-<span class="kn">from</span> <span class="nn">._fuzzy_tree</span> <span class="kn">import</span> <span class="n">FuzzyTreeBuilder</span><span class="p">,</span> <span class="n">FuzzyTree</span>
-<span class="kn">from</span> <span class="nn">._splitter</span> <span class="kn">import</span> <span class="n">Splitter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_criterion</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._fuzzy_tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuzzyRegressionTree</span><span class="p">,</span> <span class="n">FuzzyTree</span><span class="p">,</span> <span class="n">FuzzyTreeBuilder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Splitter</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FuzzyDecisionTreeClassifier&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FuzzyDecisionTreeClassifier&quot;</span><span class="p">,</span> <span class="s2">&quot;FuzzyDecisionTreeRegressor&quot;</span><span class="p">]</span>
 
 <span class="c1"># =============================================================================</span>
 <span class="c1"># Types and constants</span>
 <span class="c1"># =============================================================================</span>
 
-<span class="n">CRITERIA_CLF</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gini&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">gini_index</span><span class="p">,</span>
-                <span class="s2">&quot;entropy&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">entropy_decrease</span><span class="p">,</span>
-                <span class="s2">&quot;misclassification&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">misclassification_decrease</span><span class="p">}</span>
-
+<span class="n">CRITERIA_CLF</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;gini&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">gini_index</span><span class="p">,</span>
+    <span class="s2">&quot;entropy&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">entropy_decrease</span><span class="p">,</span>
+    <span class="s2">&quot;misclassification&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">misclassification_decrease</span><span class="p">,</span>
+    <span class="s2">&quot;variance&quot;</span><span class="p">:</span> <span class="n">_criterion</span><span class="o">.</span><span class="n">variance_decrease</span><span class="p">,</span>
+<span class="p">}</span>
 
 <span class="c1"># =============================================================================</span>
 <span class="c1"># Base decision tree</span>
 <span class="c1"># =============================================================================</span>
 
-<span class="k">class</span> <span class="nc">BaseFuzzyDecisionTree</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for fuzzy decision trees.</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseFuzzyDecisionTree</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for fuzzy decision trees.</span>
 <span class="sd">    Warning: This class should not be used directly.</span>
 <span class="sd">    Use derived classes instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
-                 <span class="n">fuzziness</span><span class="p">,</span>
-                 <span class="n">criterion</span><span class="p">,</span>
-                 <span class="n">max_depth</span><span class="p">,</span>
-                 <span class="n">min_membership_split</span><span class="p">,</span>
-                 <span class="n">min_membership_leaf</span><span class="p">,</span>
-                 <span class="n">min_impurity_decrease</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">fuzziness</span><span class="p">,</span>
+        <span class="n">criterion</span><span class="p">,</span>
+        <span class="n">max_depth</span><span class="p">,</span>
+        <span class="n">min_membership_split</span><span class="p">,</span>
+        <span class="n">min_membership_leaf</span><span class="p">,</span>
+        <span class="n">min_impurity_decrease</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fuzziness</span> <span class="o">=</span> <span class="n">fuzziness</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="o">=</span> <span class="n">max_depth</span>
@@ -224,8 +144,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span> <span class="o">=</span> <span class="n">min_membership_leaf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_impurity_decrease</span> <span class="o">=</span> <span class="n">min_impurity_decrease</span>
 
-    <span class="k">def</span> <span class="nf">get_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the depth of the decision tree.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_depth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the depth of the decision tree.</span>
 <span class="sd">        The depth of a tree is the maximum distance between the root</span>
 <span class="sd">        and any leaf.</span>
 
@@ -237,8 +157,8 @@
         <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">max_depth</span>
 
-    <span class="k">def</span> <span class="nf">get_n_leaves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of leaves of the decision tree.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_n_leaves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of leaves of the decision tree.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -248,14 +168,14 @@
         <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">n_leaves</span>
 
-    <span class="k">def</span> <span class="nf">_get_sample_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_sample_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">_check_sample_weight</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">)</span>
         <span class="n">sample_weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span> <span class="o">/</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">indices</span><span class="p">,</span> <span class="n">sample_weight</span>
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`fit` requires y not to be None&quot;</span><span class="p">)</span>
 
@@ -271,68 +191,81 @@
         <span class="n">is_classification</span> <span class="o">=</span> <span class="n">is_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Multi-output problems are not currently supported (got y.ndim=</span><span class="si">%s</span><span class="s2">).&quot;</span> <span class="o">%</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Multi-output problems are not currently supported (got y.ndim=</span><span class="si">%s</span><span class="s2">).&quot;</span>
+                <span class="o">%</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_outputs_</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="n">is_classification</span><span class="p">:</span>
             <span class="n">check_classification_targets</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_classes_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span>
 
-        <span class="n">max_depth</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="ow">is</span> <span class="kc">None</span>
-                     <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span><span class="p">)</span>
+        <span class="n">max_depth</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;min_membership_leaf must be greater than 0.0, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;min_membership_leaf must be greater than 0.0, got </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_split</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;min_membership_split must be greater than 0.0, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_split</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;min_membership_split must be greater than 0.0, got </span><span class="si">%s</span><span class="s2">&quot;</span>
+                <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_split</span>
+            <span class="p">)</span>
 
-        <span class="n">min_membership_split</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_membership_split</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span><span class="p">)</span>
+        <span class="n">min_membership_split</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_split</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_samples</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of labels=</span><span class="si">%d</span><span class="s2"> does not match &quot;</span>
-                             <span class="s2">&quot;number of samples=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">n_samples</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Number of labels=</span><span class="si">%d</span><span class="s2"> does not match &quot;</span>
+                <span class="s2">&quot;number of samples=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">n_samples</span><span class="p">)</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">max_depth</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;max_depth must be greater than zero&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_impurity_decrease</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;min_impurity_decrease must be greater than &quot;</span>
-                             <span class="s2">&quot;or equal to 0&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;min_impurity_decrease must be greater than &quot;</span> <span class="s2">&quot;or equal to 0&quot;</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">is_classification</span><span class="p">:</span>
-            <span class="n">splitter</span> <span class="o">=</span> <span class="n">Splitter</span><span class="p">(</span><span class="n">CRITERIA_CLF</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzziness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span>
+        <span class="n">splitter</span> <span class="o">=</span> <span class="n">Splitter</span><span class="p">(</span>
+            <span class="n">CRITERIA_CLF</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuzziness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">is_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span> <span class="o">=</span> <span class="n">FuzzyTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span> <span class="o">=</span> <span class="n">FuzzyRegressionTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
-        <span class="n">builder</span> <span class="o">=</span> <span class="n">FuzzyTreeBuilder</span><span class="p">(</span><span class="n">splitter</span><span class="p">,</span>
-                                   <span class="n">min_membership_split</span><span class="p">,</span>
-                                   <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span><span class="p">,</span>
-                                   <span class="n">max_depth</span><span class="p">,</span>
-                                   <span class="bp">self</span><span class="o">.</span><span class="n">min_impurity_decrease</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">FuzzyTreeBuilder</span><span class="p">(</span>
+            <span class="n">splitter</span><span class="p">,</span>
+            <span class="n">min_membership_split</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_membership_leaf</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_impurity_decrease</span><span class="p">,</span>
+            <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="p">),</span>
+        <span class="p">)</span>
 
         <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">_validate_X_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Validate the training data on predict (probabilities).&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_X_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the training data on predict (probabilities).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">check_input</span><span class="p">:</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">validate_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># The number of features is checked regardless of `check_input`</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_check_n_features</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">X</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Predict class or regression value for X.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict class or regression value for X.</span>
 <span class="sd">        For a classification model, the predicted class for each sample in X is</span>
 <span class="sd">        returned. For a regression model, the predicted value based on X is</span>
 <span class="sd">        returned.</span>
@@ -363,21 +296,18 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Multi-output problems are not currently supported.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_get_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="o">**</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_tags</span><span class="p">(),</span>
-            <span class="s2">&quot;requires_y&quot;</span><span class="p">:</span> <span class="kc">True</span>
-        <span class="p">}</span>
+            <span class="k">return</span> <span class="n">proba</span>
 
 
 <span class="c1"># =============================================================================</span>
 <span class="c1"># Public estimators</span>
 <span class="c1"># =============================================================================</span>
 
-<div class="viewcode-block" id="FuzzyDecisionTreeClassifier"><a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier">[docs]</a><span class="k">class</span> <span class="nc">FuzzyDecisionTreeClassifier</span><span class="p">(</span><span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">BaseFuzzyDecisionTree</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A fuzzy decision tree classifier.</span>
+
+<div class="viewcode-block" id="FuzzyDecisionTreeClassifier">
+<a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FuzzyDecisionTreeClassifier</span><span class="p">(</span><span class="n">ClassifierMixin</span><span class="p">,</span> <span class="n">BaseFuzzyDecisionTree</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fuzzy decision tree classifier.</span>
 <span class="sd">    Read more in the :ref:`User Guide &lt;user_guide&gt;`.</span>
 
 <span class="sd">    Parameters</span>
@@ -443,24 +373,31 @@
 <span class="sd">    predict the tied class with the lowest index in :term:`classes_`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.__init__"><a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">fuzziness</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-                 <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span>
-                 <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">min_membership_split</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
-                 <span class="n">min_membership_leaf</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
-                 <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.__init__">
+<a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fuzziness</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span>
+        <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">min_membership_split</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">min_membership_leaf</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">fuzziness</span><span class="o">=</span><span class="n">fuzziness</span><span class="p">,</span>
             <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">,</span>
             <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span>
             <span class="n">min_membership_split</span><span class="o">=</span><span class="n">min_membership_split</span><span class="p">,</span>
             <span class="n">min_membership_leaf</span><span class="o">=</span><span class="n">min_membership_leaf</span><span class="p">,</span>
-            <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="n">min_impurity_decrease</span>
+            <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="n">min_impurity_decrease</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.fit"><a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Build a fuzzy decision tree classifier from the training set (X, y).</span>
+
+<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.fit">
+<a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a fuzzy decision tree classifier from the training set (X, y).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -486,8 +423,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">,</span> <span class="n">check_input</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.predict_proba"><a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.predict_proba">[docs]</a>    <span class="k">def</span> <span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Predict class probabilities of the input samples X.</span>
+
+<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.predict_proba">
+<a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.predict_proba">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict class probabilities of the input samples X.</span>
 <span class="sd">        The predicted class probability is the fraction of membership of samples</span>
 <span class="sd">        of the same class in a leaf.</span>
 
@@ -521,8 +461,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.predict_log_proba"><a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.predict_log_proba">[docs]</a>    <span class="k">def</span> <span class="nf">predict_log_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Predict class log-probabilities of the input samples X.</span>
+
+<div class="viewcode-block" id="FuzzyDecisionTreeClassifier.predict_log_proba">
+<a class="viewcode-back" href="../../generated/fuzzytree.FuzzyDecisionTreeClassifier.html#fuzzytree.FuzzyDecisionTreeClassifier.predict_log_proba">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_log_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict class log-probabilities of the input samples X.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -548,55 +491,118 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Multi-output problems are not currently supported.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Regression trees are not currently supported.&quot;</span><span class="p">)</span></div>
+</div>
 
-    <span class="k">def</span> <span class="nf">_get_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="o">**</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_tags</span><span class="p">(),</span>
-            <span class="s2">&quot;binary_only&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">}</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FuzzyDecisionTreeRegressor</span><span class="p">(</span><span class="n">RegressorMixin</span><span class="p">,</span> <span class="n">BaseFuzzyDecisionTree</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A fuzzy decision tree regressor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fuzziness : float, default=0.8</span>
+<span class="sd">        The fuzziness parameter that controls softness of the tree between 0.</span>
+<span class="sd">        (hard) and 1. (soft).</span>
+<span class="sd">    criterion : {&quot;variance&quot;}, default=&quot;variance&quot;</span>
+<span class="sd">    max_depth : int, default=None</span>
+<span class="sd">        The maximum depth of the tree. If None, then nodes are expanded until</span>
+<span class="sd">        all leaves are pure or until all leaves contain less than</span>
+<span class="sd">        min_membership_split sum of membership or recursion limit is met.</span>
+<span class="sd">    min_membership_split : float, default=2.0</span>
+<span class="sd">        The minimum sum of membership required to split an internal node.</span>
+<span class="sd">    min_membership_leaf : float, default=1.0</span>
+<span class="sd">        The minimum sum of membership required to be at a leaf node.</span>
+<span class="sd">        A split point at any depth will only be considered if it leaves at</span>
+<span class="sd">        least ``min_membership_leaf`` sum of membership in each of the left and</span>
+<span class="sd">        right branches. This may have the effect of smoothing the model,</span>
+<span class="sd">        especially in regression.</span>
+<span class="sd">    min_impurity_decrease : float, default=0.0</span>
+<span class="sd">        A node will be split if this split induces a decrease of the impurity</span>
+<span class="sd">        greater than or equal to this value.</span>
+
+<span class="sd">        The weighted impurity decrease equation is the following::</span>
+
+<span class="sd">            impurity - M_t_R / M_t * right_impurity</span>
+<span class="sd">                     - M_t_L / M_t * left_impurity</span>
+
+<span class="sd">        where ``M_t_L`` is the sum of membership in the left child and ``M_t_R``</span>
+<span class="sd">        is the sum of membership in the right child.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    classes_ : ndarray of shape (n_classes,)</span>
+<span class="sd">        The classes labels.</span>
+<span class="sd">    n_classes_ : int or list of int</span>
+<span class="sd">        The number of classes (for single output problems),</span>
+<span class="sd">        or a list containing the number of classes for each</span>
+<span class="sd">        output (for multi-output problems).</span>
+<span class="sd">    n_features_ : int</span>
+<span class="sd">        The number of features when ``fit`` is performed.</span>
+<span class="sd">    n_outputs_ : int</span>
+<span class="sd">        The number of outputs when ``fit`` is performed. Currently, always equals 1.</span>
+<span class="sd">    tree_ : FuzzyTree</span>
+<span class="sd">        The underlying Tree object. Please refer to</span>
+<span class="sd">        ``help(fuzzytree._fuzzy_tree.FuzzyTree)`` for attributes of Tree object and</span>
+<span class="sd">        for basic usage of these attributes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fuzziness</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span>
+        <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">min_membership_split</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+        <span class="n">min_membership_leaf</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">fuzziness</span><span class="o">=</span><span class="n">fuzziness</span><span class="p">,</span>
+            <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span>
+            <span class="n">min_membership_split</span><span class="o">=</span><span class="n">min_membership_split</span><span class="p">,</span>
+            <span class="n">min_membership_leaf</span><span class="o">=</span><span class="n">min_membership_leaf</span><span class="p">,</span>
+            <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="n">min_impurity_decrease</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">,</span> <span class="n">check_input</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_X_predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">check_input</span><span class="p">)</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">sample_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sample_weight</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="n">predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">predictions</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Jakub Balinski.
-
-    </p>
+    <p>&#169; Copyright 2021, Jakub Balinski.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
