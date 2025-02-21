@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:30.309** total execution time for 6 files **from all galleries**:
+**00:29.879** total execution time for 6 files **from all galleries**:
 
 .. container::
 
@@ -33,19 +33,19 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_plot_moons_comparison.py` (``../examples/plot_moons_comparison.py``)
-     - 00:09.920
+     - 00:09.869
      - 0.0
    * - :ref:`sphx_glr_auto_examples_plot_classifier.py` (``../examples/plot_classifier.py``)
-     - 00:06.328
+     - 00:06.179
      - 0.0
    * - :ref:`sphx_glr_auto_examples_plot_circle_comparison.py` (``../examples/plot_circle_comparison.py``)
-     - 00:05.094
+     - 00:05.030
      - 0.0
    * - :ref:`sphx_glr_auto_examples_plot_blobs_comparison.py` (``../examples/plot_blobs_comparison.py``)
-     - 00:04.969
+     - 00:04.885
      - 0.0
    * - :ref:`sphx_glr_auto_examples_plot_iris_comparison.py` (``../examples/plot_iris_comparison.py``)
-     - 00:03.998
+     - 00:03.917
      - 0.0
    * - :ref:`sphx_glr_auto_examples_regression_tree.py` (``../examples/regression_tree.py``)
      - 00:00.000
