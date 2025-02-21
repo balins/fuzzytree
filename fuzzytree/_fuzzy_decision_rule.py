@@ -58,8 +58,10 @@ class FuzzyDecisionRule:
         n_samples = X.shape[0]
         n_features = X.shape[1]
         if n_features < self.feature_idx - 1:
-            raise ValueError("input of this decision rule must have at least %s features (got %s)."
-                             % (self.feature_idx + 1, n_features))
+            raise ValueError(
+                "input of this decision rule must have at least %s features (got %s)."
+                % (self.feature_idx + 1, n_features)
+            )
         if n_samples == 0:
             return np.array([])
 

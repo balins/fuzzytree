@@ -23,7 +23,9 @@ def gini_index(y, membership, membership_true, membership_false):
     float : decrease of impurity measured by Gini index
     """
 
-    gini_criterion_ = impurity_decrease(y, membership, membership_true, membership_false, gini)
+    gini_criterion_ = impurity_decrease(
+        y, membership, membership_true, membership_false, gini
+    )
 
     return gini_criterion_
 
@@ -48,7 +50,9 @@ def entropy_decrease(y, membership, membership_true, membership_false):
     float : decrease of impurity measured by entropy
     """
 
-    entropy_decrease_ = impurity_decrease(y, membership, membership_true, membership_false, entropy)
+    entropy_decrease_ = impurity_decrease(
+        y, membership, membership_true, membership_false, entropy
+    )
 
     return entropy_decrease_
 
@@ -73,33 +77,38 @@ def misclassification_decrease(y, membership, membership_true, membership_false)
     float : decrease of impurity measured by misclassification ratio
     """
 
-    misclassification_ratio_ = impurity_decrease(y, membership, membership_true, membership_false, misclassification)
+    misclassification_ratio_ = impurity_decrease(
+        y, membership, membership_true, membership_false, misclassification
+    )
 
     return misclassification_ratio_
 
 
 def variance_decrease(y, membership, membership_true, membership_false):
     """
-        Calculate the decrease in variance for new membership values.
+    Calculate the decrease in variance for new membership values.
 
-        Parameters
-        ----------
-        y : array-like of shape (n_samples,)
-            The array of y values which could be float type.
-        membership : array-like of shape (n_samples,)
-            The old membership of each label.
-        membership_true : array-like of shape (n_samples,)
-            The new membership of each label.
-        membership_false : array-like of shape (n_samples,)
-            The complement of new membership of each label.
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        The array of y values which could be float type.
+    membership : array-like of shape (n_samples,)
+        The old membership of each label.
+    membership_true : array-like of shape (n_samples,)
+        The new membership of each label.
+    membership_false : array-like of shape (n_samples,)
+        The complement of new membership of each label.
 
-        Returns
-        -------
-        float : decrease of impurity measured by misclassification ratio
+    Returns
+    -------
+    float : decrease of impurity measured by misclassification ratio
     """
-    var_decrease = impurity_decrease(y, membership, membership_true, membership_false, regression_variance)
+    var_decrease = impurity_decrease(
+        y, membership, membership_true, membership_false, regression_variance
+    )
 
     return var_decrease
+
 
 def impurity_decrease(y, membership, membership_true, membership_false, criterion):
     """
@@ -122,9 +131,11 @@ def impurity_decrease(y, membership, membership_true, membership_false, criterio
     -------
     float : decrease of impurity measured by given criterion
     """
-    information_gain_ = criterion(y, membership) \
-                        - (membership_true.sum() / membership.sum()) * criterion(y, membership_true) \
-                        - (membership_false.sum() / membership.sum()) * criterion(y, membership_false)
+    information_gain_ = (
+        criterion(y, membership)
+        - (membership_true.sum() / membership.sum()) * criterion(y, membership_true)
+        - (membership_false.sum() / membership.sum()) * criterion(y, membership_false)
+    )
 
     return information_gain_
 
@@ -146,7 +157,7 @@ def gini(y, membership):
     """
     mr = membership_ratio(y, membership)
 
-    gini_ = 1 - np.sum(mr ** 2)
+    gini_ = 1 - np.sum(mr**2)
 
     return gini_
 
@@ -195,6 +206,7 @@ def misclassification(y, membership):
 
     return misclassification_
 
+
 def regression_variance(y, membership):
     """
     Calculates weighted variance for regression impurity.
@@ -221,4 +233,3 @@ def regression_variance(y, membership):
     variance_ = np.sum(weights * (y - weighted_mean) ** 2)
 
     return variance_
-

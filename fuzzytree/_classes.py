@@ -6,12 +6,17 @@ decision tree classification is supported.
 from abc import ABCMeta, abstractmethod
 
 import numpy as np
-from sklearn.base import BaseEstimator, ClassifierMixin, is_classifier, RegressorMixin
+from sklearn.base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier
 from sklearn.utils.multiclass import check_classification_targets
-from sklearn.utils.validation import check_X_y, check_is_fitted, _check_sample_weight, validate_data
+from sklearn.utils.validation import (
+    _check_sample_weight,
+    check_is_fitted,
+    check_X_y,
+    validate_data,
+)
 
 from . import _criterion
-from ._fuzzy_tree import FuzzyTreeBuilder, FuzzyTree, FuzzyRegressionTree
+from ._fuzzy_tree import FuzzyRegressionTree, FuzzyTree, FuzzyTreeBuilder
 from ._splitter import Splitter
 
 __all__ = ["FuzzyDecisionTreeClassifier", "FuzzyDecisionTreeRegressor"]
@@ -20,16 +25,17 @@ __all__ = ["FuzzyDecisionTreeClassifier", "FuzzyDecisionTreeRegressor"]
 # Types and constants
 # =============================================================================
 
-CRITERIA_CLF = {"gini": _criterion.gini_index,
-                "entropy": _criterion.entropy_decrease,
-                "misclassification": _criterion.misclassification_decrease,
-                "variance": _criterion.variance_decrease,
-                }
-
+CRITERIA_CLF = {
+    "gini": _criterion.gini_index,
+    "entropy": _criterion.entropy_decrease,
+    "misclassification": _criterion.misclassification_decrease,
+    "variance": _criterion.variance_decrease,
+}
 
 # =============================================================================
 # Base decision tree
 # =============================================================================
+
 
 class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
     """Base class for fuzzy decision trees.
@@ -38,13 +44,16 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, *,
-                 fuzziness,
-                 criterion,
-                 max_depth,
-                 min_membership_split,
-                 min_membership_leaf,
-                 min_impurity_decrease):
+    def __init__(
+        self,
+        *,
+        fuzziness,
+        criterion,
+        max_depth,
+        min_membership_split,
+        min_membership_leaf,
+        min_impurity_decrease
+    ):
         self.fuzziness = fuzziness
         self.criterion = criterion
         self.max_depth = max_depth
@@ -99,7 +108,10 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
         is_classification = is_classifier(self)
 
         if y.ndim != 1:
-            raise ValueError("Multi-output problems are not currently supported (got y.ndim=%s)." % y.ndim)
+            raise ValueError(
+                "Multi-output problems are not currently supported (got y.ndim=%s)."
+                % y.ndim
+            )
         self.n_outputs_ = 1
 
         if is_classification:
@@ -107,41 +119,54 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
             self.classes_, self.y_ = np.unique(y, return_inverse=True)
             self.n_classes_ = self.classes_.shape[0]
 
-        max_depth = (float('inf') if self.max_depth is None
-                     else self.max_depth)
+        max_depth = float("inf") if self.max_depth is None else self.max_depth
 
         if not self.min_membership_leaf > 0:
-            raise ValueError("min_membership_leaf must be greater than 0.0, got %s" % self.min_membership_leaf)
+            raise ValueError(
+                "min_membership_leaf must be greater than 0.0, got %s"
+                % self.min_membership_leaf
+            )
 
         if not self.min_membership_split > 0:
-            raise ValueError("min_membership_split must be greater than 0.0, got %s" % self.min_membership_split)
+            raise ValueError(
+                "min_membership_split must be greater than 0.0, got %s"
+                % self.min_membership_split
+            )
 
-        min_membership_split = max(self.min_membership_split, 2 * self.min_membership_leaf)
+        min_membership_split = max(
+            self.min_membership_split, 2 * self.min_membership_leaf
+        )
 
         if len(y) != n_samples:
-            raise ValueError("Number of labels=%d does not match "
-                             "number of samples=%d" % (len(y), n_samples))
+            raise ValueError(
+                "Number of labels=%d does not match "
+                "number of samples=%d" % (len(y), n_samples)
+            )
         if max_depth <= 0:
             raise ValueError("max_depth must be greater than zero")
 
         if self.min_impurity_decrease < 0:
-            raise ValueError("min_impurity_decrease must be greater than "
-                             "or equal to 0")
+            raise ValueError(
+                "min_impurity_decrease must be greater than " "or equal to 0"
+            )
 
-        splitter = Splitter(CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf)
+        splitter = Splitter(
+            CRITERIA_CLF[self.criterion], self.fuzziness, self.min_membership_leaf
+        )
 
         if is_classifier(self):
             self.tree_ = FuzzyTree(self.y_, sample_weight)
         else:
             self.tree_ = FuzzyRegressionTree(self.y_, sample_weight)
 
-        builder = FuzzyTreeBuilder(splitter,
-                                   min_membership_split,
-                                   self.min_membership_leaf,
-                                   max_depth,
-                                   self.min_impurity_decrease,
-                                   type(self.tree_)
-                                   )
+        builder = FuzzyTreeBuilder(
+            splitter,
+            min_membership_split,
+            self.min_membership_leaf,
+            max_depth,
+            self.min_impurity_decrease,
+            type(self.tree_),
+        )
 
         builder.build(self.tree_, self.X_, self.y_, sample_weight)
 
@@ -190,9 +215,11 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
         else:
             return proba
 
+
 # =============================================================================
 # Public estimators
 # =============================================================================
+
 
 class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
     """A fuzzy decision tree classifier.
@@ -261,20 +288,22 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
     predict the tied class with the lowest index in :term:`classes_`.
     """
 
-    def __init__(self,
-                 fuzziness=0.8,
-                 criterion='gini',
-                 max_depth=None,
-                 min_membership_split=2.,
-                 min_membership_leaf=1.,
-                 min_impurity_decrease=0.):
+    def __init__(
+        self,
+        fuzziness=0.8,
+        criterion="gini",
+        max_depth=None,
+        min_membership_split=2.0,
+        min_membership_leaf=1.0,
+        min_impurity_decrease=0.0,
+    ):
         super().__init__(
             fuzziness=fuzziness,
             criterion=criterion,
             max_depth=max_depth,
             min_membership_split=min_membership_split,
             min_membership_leaf=min_membership_leaf,
-            min_impurity_decrease=min_impurity_decrease
+            min_impurity_decrease=min_impurity_decrease,
         )
 
     def fit(self, X, y, sample_weight=None, check_input=True):
@@ -367,83 +396,85 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
         else:
             raise NotImplementedError("Regression trees are not currently supported.")
 
+
 class FuzzyDecisionTreeRegressor(RegressorMixin, BaseFuzzyDecisionTree):
     """A fuzzy decision tree regressor.
 
-        Parameters
-        ----------
-        fuzziness : float, default=0.8
-            The fuzziness parameter that controls softness of the tree between 0.
-            (hard) and 1. (soft).
-        criterion : {"variance"}, default="variance"
-        max_depth : int, default=None
-            The maximum depth of the tree. If None, then nodes are expanded until
-            all leaves are pure or until all leaves contain less than
-            min_membership_split sum of membership or recursion limit is met.
-        min_membership_split : float, default=2.0
-            The minimum sum of membership required to split an internal node.
-        min_membership_leaf : float, default=1.0
-            The minimum sum of membership required to be at a leaf node.
-            A split point at any depth will only be considered if it leaves at
-            least ``min_membership_leaf`` sum of membership in each of the left and
-            right branches. This may have the effect of smoothing the model,
-            especially in regression.
-        min_impurity_decrease : float, default=0.0
-            A node will be split if this split induces a decrease of the impurity
-            greater than or equal to this value.
+    Parameters
+    ----------
+    fuzziness : float, default=0.8
+        The fuzziness parameter that controls softness of the tree between 0.
+        (hard) and 1. (soft).
+    criterion : {"variance"}, default="variance"
+    max_depth : int, default=None
+        The maximum depth of the tree. If None, then nodes are expanded until
+        all leaves are pure or until all leaves contain less than
+        min_membership_split sum of membership or recursion limit is met.
+    min_membership_split : float, default=2.0
+        The minimum sum of membership required to split an internal node.
+    min_membership_leaf : float, default=1.0
+        The minimum sum of membership required to be at a leaf node.
+        A split point at any depth will only be considered if it leaves at
+        least ``min_membership_leaf`` sum of membership in each of the left and
+        right branches. This may have the effect of smoothing the model,
+        especially in regression.
+    min_impurity_decrease : float, default=0.0
+        A node will be split if this split induces a decrease of the impurity
+        greater than or equal to this value.
 
-            The weighted impurity decrease equation is the following::
+        The weighted impurity decrease equation is the following::
 
-                impurity - M_t_R / M_t * right_impurity
-                         - M_t_L / M_t * left_impurity
+            impurity - M_t_R / M_t * right_impurity
+                     - M_t_L / M_t * left_impurity
 
-            where ``M_t_L`` is the sum of membership in the left child and ``M_t_R``
-            is the sum of membership in the right child.
+        where ``M_t_L`` is the sum of membership in the left child and ``M_t_R``
+        is the sum of membership in the right child.
 
-        Attributes
-        ----------
-        classes_ : ndarray of shape (n_classes,)
-            The classes labels.
-        n_classes_ : int or list of int
-            The number of classes (for single output problems),
-            or a list containing the number of classes for each
-            output (for multi-output problems).
-        n_features_ : int
-            The number of features when ``fit`` is performed.
-        n_outputs_ : int
-            The number of outputs when ``fit`` is performed. Currently, always equals 1.
-        tree_ : FuzzyTree
-            The underlying Tree object. Please refer to
-            ``help(fuzzytree._fuzzy_tree.FuzzyTree)`` for attributes of Tree object and
-            for basic usage of these attributes.
+    Attributes
+    ----------
+    classes_ : ndarray of shape (n_classes,)
+        The classes labels.
+    n_classes_ : int or list of int
+        The number of classes (for single output problems),
+        or a list containing the number of classes for each
+        output (for multi-output problems).
+    n_features_ : int
+        The number of features when ``fit`` is performed.
+    n_outputs_ : int
+        The number of outputs when ``fit`` is performed. Currently, always equals 1.
+    tree_ : FuzzyTree
+        The underlying Tree object. Please refer to
+        ``help(fuzzytree._fuzzy_tree.FuzzyTree)`` for attributes of Tree object and
+        for basic usage of these attributes.
     """
-    def __init__(self,
-                 fuzziness=0.8,
-                 criterion='variance',
-                 max_depth=None,
-                 min_membership_split=2.,
-                 min_membership_leaf=1.,
-                 min_impurity_decrease=0.):
+
+    def __init__(
+        self,
+        fuzziness=0.8,
+        criterion="variance",
+        max_depth=None,
+        min_membership_split=2.0,
+        min_membership_leaf=1.0,
+        min_impurity_decrease=0.0,
+    ):
         super().__init__(
             fuzziness=fuzziness,
             criterion=criterion,
             max_depth=max_depth,
             min_membership_split=min_membership_split,
             min_membership_leaf=min_membership_leaf,
-            min_impurity_decrease=min_impurity_decrease
+            min_impurity_decrease=min_impurity_decrease,
         )
 
     def fit(self, X, y, sample_weight=None, check_input=True):
-
         return super().fit(X, y, sample_weight, check_input)
 
     def predict(self, X, check_input=True):
-
         check_is_fitted(self)
         X = self._validate_X_predict(X, check_input)
 
         _, sample_weight = self._get_sample_weight(X)
 
-
         predictions = self.tree_.predict(X, sample_weight)
+
         return predictions.flatten()

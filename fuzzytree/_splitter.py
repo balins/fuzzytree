@@ -55,19 +55,31 @@ class Splitter:
             midpoint_splits = ((sorted_unique + np.roll(sorted_unique, -1)) / 2)[:-1]
 
             for split_val in midpoint_splits:
-                rule = FuzzyDecisionRule(sorted_unique, split_val, self.fuzziness, feature_idx)
+                rule = FuzzyDecisionRule(
+                    sorted_unique, split_val, self.fuzziness, feature_idx
+                )
 
                 new_membership = rule.evaluate(X)
                 membership_true = joint_membership(membership, new_membership)
                 membership_false = joint_membership(membership, 1 - new_membership)
 
-                if min(membership_false.sum(), membership_true.sum()) < self.min_membership:
+                if (
+                    min(membership_false.sum(), membership_true.sum())
+                    < self.min_membership
+                ):
                     continue
 
-                gain = self.gain_function(y, membership, membership_true, membership_false)
+                gain = self.gain_function(
+                    y, membership, membership_true, membership_false
+                )
 
                 if gain > best_gain:
-                    best_rule, best_true, best_false, best_gain = rule, membership_true, membership_false, gain
+                    best_rule, best_true, best_false, best_gain = (
+                        rule,
+                        membership_true,
+                        membership_false,
+                        gain,
+                    )
 
         return best_rule, best_true, best_false, best_gain
 
