@@ -2,7 +2,7 @@ from collections import deque
 
 import numpy as np
 
-from ._utils import membership_ratio, joint_membership
+from ._utils import membership_ratio, joint_membership, weighted_mean
 
 
 class FuzzyTreeBuilder:
@@ -25,6 +25,8 @@ class FuzzyTreeBuilder:
            especially in regression.
        min_impurity_decrease : float
            The minimal gain in impurity decrease required for a node to be split.
+       fuzzy_tree_class : class type
+            Class for fuzzy tree class, could be FuzzyTree or FuzzyRegressionTree
     """
 
     def __init__(self,
@@ -32,12 +34,14 @@ class FuzzyTreeBuilder:
                  min_membership_split,
                  min_membership_leaf,
                  max_depth,
-                 min_impurity_decrease):
+                 min_impurity_decrease,
+                 fuzzy_tree_class):
         self.splitter = splitter
         self.min_membership_split = min_membership_split
         self.min_membership_leaf = min_membership_leaf
         self.max_depth = max_depth
         self.min_impurity_decrease = min_impurity_decrease
+        self.fuzzy_tree_class = fuzzy_tree_class
 
     def build(self, tree, X, y, membership):
         """Build a fuzzy decision tree.
@@ -69,8 +73,8 @@ class FuzzyTreeBuilder:
                 continue
 
             tree.rule = rule
-            tree.true_branch = FuzzyTree(y, membership_true, tree.level + 1)
-            tree.false_branch = FuzzyTree(y, membership_false, tree.level + 1)
+            tree.true_branch = self.fuzzy_tree_class(y, membership_true, tree.level + 1)
+            tree.false_branch = self.fuzzy_tree_class(y, membership_false, tree.level + 1)
 
             stack.append((tree.true_branch, membership_true))
             stack.append((tree.false_branch, membership_false))
@@ -181,3 +185,59 @@ class FuzzyTree:
         bool : True if node is a leaf.
         """
         return self.rule is None
+
+
+class FuzzyRegressionTree(FuzzyTree):
+    """Fuzzy decision tree for regression.
+
+        Parameters
+        ----------
+        y : array-like of shape (n_samples,)
+            The array of y values.
+        membership : array-like of shape (n_samples,)
+            The membership of samples that respective labels are
+            coming from.
+        level : int
+            Depth of the node.
+        rule : FuzzyDecisionRule, default=None
+            The rule that was used to split this node. If None,
+            then the node is a leaf.
+        true_branch : FuzzyTree, default=None
+            The child node containing labels of samples which
+            memberships of were evaluated as non-zero by the
+            fuzzy decision rule. If None, then the node is a leaf.
+        false_branch : FuzzyTree, default=None
+            The child node containing labels of samples which
+            memberships of were evaluated as non-zero by the
+            inverse of the fuzzy decision rule. If None, then
+            the node is a leaf.
+
+        Attributes
+        ----------
+        weighted_mean : float
+            The weighted_mean of y values on the node
+        """
+    def __init__(self, y, membership, level=0, rule=None, true_branch=None, false_branch=None):
+        self.weighted_mean = weighted_mean(y, membership)
+        self.level = level
+        self.rule = rule
+        self.true_branch = true_branch
+        self.false_branch = false_branch
+
+    def _predict_internal(self, X, membership):
+        new_membership = self.rule.evaluate(X)
+
+        membership_true = joint_membership(membership, new_membership)
+        membership_false = joint_membership(membership, 1 - new_membership)
+
+        prediction = np.zeros((X.shape[0], 1))
+
+        if membership_true.any():
+            prediction = self.true_branch.predict(X, membership_true)
+        if membership_false.any():
+            prediction += self.false_branch.predict(X, membership_false)
+
+        return prediction
+
+    def _predict_leaf(self, membership):
+        return joint_membership(membership[:, None], self.weighted_mean)

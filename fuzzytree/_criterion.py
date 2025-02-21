@@ -78,6 +78,29 @@ def misclassification_decrease(y, membership, membership_true, membership_false)
     return misclassification_ratio_
 
 
+def variance_decrease(y, membership, membership_true, membership_false):
+    """
+        Calculate the decrease in variance for new membership values.
+
+        Parameters
+        ----------
+        y : array-like of shape (n_samples,)
+            The array of y values which could be float type.
+        membership : array-like of shape (n_samples,)
+            The old membership of each label.
+        membership_true : array-like of shape (n_samples,)
+            The new membership of each label.
+        membership_false : array-like of shape (n_samples,)
+            The complement of new membership of each label.
+
+        Returns
+        -------
+        float : decrease of impurity measured by misclassification ratio
+    """
+    var_decrease = impurity_decrease(y, membership, membership_true, membership_false, regression_variance)
+
+    return var_decrease
+
 def impurity_decrease(y, membership, membership_true, membership_false, criterion):
     """
     A general function that calculates decrease in impurity.
@@ -171,3 +194,31 @@ def misclassification(y, membership):
     misclassification_ = 1 - mr.max()
 
     return misclassification_
+
+def regression_variance(y, membership):
+    """
+    Calculates weighted variance for regression impurity.
+
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,)
+        The array of target values (continuous).
+    membership : array-like of shape (n_samples,)
+        The membership of each target value.
+
+    Returns
+    -------
+    float : weighted variance.
+    """
+    # Normalize memberships to use as weights
+    total_membership = np.sum(membership)
+    if total_membership == 0:
+        return 0.0
+
+    weights = membership / total_membership
+
+    weighted_mean = np.sum(weights * y)
+    variance_ = np.sum(weights * (y - weighted_mean) ** 2)
+
+    return variance_
+
