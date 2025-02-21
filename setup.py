@@ -21,7 +21,7 @@ PROJECT_URLS = {
     'Documentation': 'https://balins.github.io/fuzzytree',
     'Source Code': 'https://github.com/balins/fuzzytree'
 }
-LICENSE = 'new BSD'
+LICENSE = 'BSD-3-Clause'
 VERSION = __version__
 INSTALL_REQUIRES = ['numpy', 'scikit-learn']
 CLASSIFIERS = ['Intended Audience :: Science/Research',
