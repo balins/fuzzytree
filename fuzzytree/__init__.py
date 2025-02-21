@@ -1,5 +1,5 @@
-from ._classes import FuzzyDecisionTreeClassifier
+from ._classes import FuzzyDecisionTreeClassifier, FuzzyDecisionTreeRegressor
 
 from ._version import __version__
 
-__all__ = ['FuzzyDecisionTreeClassifier', '__version__']
+__all__ = ['FuzzyDecisionTreeClassifier', 'FuzzyDecisionTreeRegressor', '__version__']

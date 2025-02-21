@@ -8,13 +8,13 @@ from abc import ABCMeta, abstractmethod
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin, is_classifier, RegressorMixin
 from sklearn.utils.multiclass import check_classification_targets
-from sklearn.utils.validation import check_X_y, check_is_fitted, _check_sample_weight
+from sklearn.utils.validation import check_X_y, check_is_fitted, _check_sample_weight, validate_data
 
 from . import _criterion
 from ._fuzzy_tree import FuzzyTreeBuilder, FuzzyTree, FuzzyRegressionTree
 from ._splitter import Splitter
 
-__all__ = ["FuzzyDecisionTreeClassifier"]
+__all__ = ["FuzzyDecisionTreeClassifier", "FuzzyDecisionTreeRegressor"]
 
 # =============================================================================
 # Types and constants
@@ -150,7 +150,7 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
     def _validate_X_predict(self, X, check_input):
         """Validate the training data on predict (probabilities)."""
         if check_input:
-            X = self._validate_data(X, dtype=np.float64, reset=False)
+            X = validate_data(self, X, dtype=np.float64, reset=False)
         else:
             # The number of features is checked regardless of `check_input`
             self._check_n_features(X, reset=False)
@@ -189,13 +189,6 @@ class BaseFuzzyDecisionTree(BaseEstimator, metaclass=ABCMeta):
                 raise ValueError("Multi-output problems are not currently supported.")
         else:
             return proba
-
-    def _get_tags(self):
-        return {
-            **super()._get_tags(),
-            "requires_y": True
-        }
-
 
 # =============================================================================
 # Public estimators
@@ -374,12 +367,6 @@ class FuzzyDecisionTreeClassifier(ClassifierMixin, BaseFuzzyDecisionTree):
         else:
             raise NotImplementedError("Regression trees are not currently supported.")
 
-    def _get_tags(self):
-        return {
-            **super()._get_tags(),
-            "binary_only": False
-        }
-
 class FuzzyDecisionTreeRegressor(RegressorMixin, BaseFuzzyDecisionTree):
     """A fuzzy decision tree regressor.
 
@@ -460,9 +447,3 @@ class FuzzyDecisionTreeRegressor(RegressorMixin, BaseFuzzyDecisionTree):
 
         predictions = self.tree_.predict(X, sample_weight)
         return predictions.flatten()
-
-    def _get_tags(self):
-        return {
-            **super()._get_tags(),
-            "binary_only": False
-        }
